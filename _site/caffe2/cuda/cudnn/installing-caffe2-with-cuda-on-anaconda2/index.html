@@ -1,0 +1,499 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.10.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Installing Caffe2 with CUDA on Anaconda 2 - JIN ZHE’s blog</title>
+<meta name="description" content="It is often the case in research labs that you do not get access to admin priviledges and so installation of AI tools can be nerve-racking.The following guide shows you how to install install Caffe2 with CUDA under the Anaconda 2 virtual environment without needing to use sudo. This guide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUs with CUDA support. As caffe2 is best supported on Python 2 at the time of this writing, this installation guide is written for Python 2.7.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="JIN ZHE's blog">
+<meta property="og:title" content="Installing Caffe2 with CUDA on Anaconda 2">
+<meta property="og:url" content="http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda2/">
+
+
+  <meta property="og:description" content="It is often the case in research labs that you do not get access to admin priviledges and so installation of AI tools can be nerve-racking.The following guide shows you how to install install Caffe2 with CUDA under the Anaconda 2 virtual environment without needing to use sudo. This guide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUs with CUDA support. As caffe2 is best supported on Python 2 at the time of this writing, this installation guide is written for Python 2.7.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2018-02-19T16:10:00+08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda2/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "JIN ZHE",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="JIN ZHE's blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="http://localhost:4000/">JIN ZHE's blog</a>
+        <ul class="visible-links">
+          
+        </ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="http://localhost:4000/assets/images/bio-photo.png" alt="Jin Zhe" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Jin Zhe</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        I code.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Singapore</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/https://github.com/jin-zhe" itemprop="sameAs">
+            <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Installing Caffe2 with CUDA on Anaconda 2">
+    <meta itemprop="description" content="It is often the case in research labs that you do not get access to admin priviledges and so installation of AI tools can be nerve-racking.The following guide shows you how to install install Caffe2 with CUDA under the Anaconda 2 virtual environment without needing to use sudo. This guide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUs with CUDA support. As caffe2 is best supported on Python 2 at the time of this writing, this installation guide is written for Python 2.7.">
+    <meta itemprop="datePublished" content="February 19, 2018">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Installing Caffe2 with CUDA on Anaconda 2
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>It is often the case in research labs that you do not get access to admin priviledges and so installation of AI tools can be nerve-racking.
+The following guide shows you how to install install <a href="https://github.com/caffe2/caffe2">Caffe2</a> with CUDA under the Anaconda 2 virtual environment without needing to use <code class="highlighter-rouge">sudo</code>. This guide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUs with CUDA support. As caffe2 is best supported on Python 2 at the time of this writing, this installation guide is written for Python 2.7.</p>
+
+<h1 id="guide">Guide</h1>
+<p>Find out your CUDA version by running the following command</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cat</span> /usr/local/cuda/version.txt
+<span class="c">#=&gt; CUDA Version 8.0.61</span></code></pre></figure>
+
+<p>Download the NVIDIA cuDNN <a href="https://developer.nvidia.com/cudnn">here</a> corresponding to your CUDA version. You’ll be requried to sign up for a free developer account if you have not already done so. Be sure to download via the link that reads something like <code class="highlighter-rouge">cuDNN v7.0.5 Library for Linux</code>. Do not download the <code class="highlighter-rouge">.deb</code> version as you’ll need admin privilege to install that. The file I downloaded was named <code class="highlighter-rouge">cudnn-8.0-linux-x64-v7.tgz</code> and we are going to extract its contents into the home directory</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># cd your_download_directory</span>
+<span class="nb">tar</span> <span class="nt">-zxvf</span> cudnn-8.0-linux-x64-v7.tgz <span class="nt">-C</span> ~/</code></pre></figure>
+
+<p>This should create a <code class="highlighter-rouge">~/cuda</code> directory.</p>
+
+<p>Now let’s install <strong>Anaconda 2</strong> via the download page <a href="https://www.anaconda.com/download/#linux">here</a>.  The “2” simply means it’s for Python 2 so don’t download Anaconda 3 that is meant for Python 3.
+My downloaded file was a shell script called <code class="highlighter-rouge">Anaconda2-5.0.1-Linux-x86_64.sh</code>. Let’s run it</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">bash Anaconda-latest-Linux-x86_64.sh</code></pre></figure>
+
+<p>Be sure to run a first update right after installation</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda update conda</code></pre></figure>
+
+<p>Let’s create a virtual Anaconda environment called “caffe2”.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda create <span class="nt">-n</span> caffe2 <span class="nv">python</span><span class="o">=</span>2.7 anaconda</code></pre></figure>
+
+<p><em>You many of course use a different environment name, just be sure to adjust accordingly for the rest of this guide</em></p>
+
+<p>After it prepares the environment and installs the defaults, activate the virtual environment via</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">source </span>activate caffe2
+<span class="c"># to deactivate: source deactivate caffe2</span></code></pre></figure>
+
+<p>Now let’s install the necessary dependencies in our current caffe2 environment:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda install <span class="nt">-y</span> future gflags glog lmdb mkl mkl-include numpy opencv protobuf snappy six cmake</code></pre></figure>
+
+<p>Let’s clone the caffe2’s repo into our home directory.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> ~ <span class="o">&amp;&amp;</span> git clone <span class="nt">--recursive</span> https://github.com/caffe2/caffe2.git <span class="o">&amp;&amp;</span> <span class="nb">cd </span>caffe2</code></pre></figure>
+
+<p>We shall avoid polluting the caffe2 source tree by building within build a folder</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build</code></pre></figure>
+
+<p>We shall now build the package using CMake with the following flags</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">cmake <span class="nt">-DCUDNN_INCLUDE_DIR</span><span class="o">=</span>~/cuda/include <span class="nt">-DCUDNN_LIBRARY</span><span class="o">=</span>~/cuda/lib64/libcudnn.so <span class="nt">-DCMAKE_PREFIX_PATH</span><span class="o">=</span>~/anaconda2/envs/caffe2 <span class="nt">-DCMAKE_INSTALL_PREFIX</span><span class="o">=</span>~/anaconda2/envs/caffe2 ..</code></pre></figure>
+
+<ul>
+  <li><code class="highlighter-rouge">CMAKE_PREFIX_PATH</code> tells CMake to look for packages in your conda environment before looking in system install locations (like <code class="highlighter-rouge">/usr/local</code>)</li>
+  <li><code class="highlighter-rouge">CMAKE_INSTALL_PREFIX</code> tells CMake where to install Caffe2 binaries such as <code class="highlighter-rouge">libcaffe2.dylib</code> after Caffe2 has been successfully built, the default is <code class="highlighter-rouge">/usr/local</code> which will require administrator privilege</li>
+</ul>
+
+<p>Let’s find out how many cores your machine has</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cat</span> /proc/cpuinfo | <span class="nb">grep </span>processor | wc <span class="nt">-l</span>
+<span class="c">#=&gt; n</span></code></pre></figure>
+
+<p>Let’s <code class="highlighter-rouge">make</code> the package efficiently by maximising the number of jobs for it. General rule of thumb is to use 1 + n number of jobs where n is the output from the previous command. i.e. number of cores. Mine was 24 so I run the following</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">make <span class="nt">-j</span> 25</code></pre></figure>
+
+<p>After make is completed, we are now finally ready to install</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">make install</code></pre></figure>
+
+<p>You’d think we’re done, but not quite! For some reason python will not know where to look for the caffe2 python modules. I’m not sure why is this and if you do know how to fix it in the installation process, please let me know! My fix is to point the <code class="highlighter-rouge">$PYTHONPATH</code> environment variable to our caffe2 build folder. To do this, append the following line to your <code class="highlighter-rouge">~/.bashrc</code> using your favorite text editor</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">export </span><span class="nv">PYTHONPATH</span><span class="o">=</span>~/caffe2/build</code></pre></figure>
+
+<p>Reload the shell</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">source</span> ~/.bashrc</code></pre></figure>
+
+<p>We are now ready to test if caffe2 has installed correctly</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> ~
+<span class="c"># To check if Caffe2 build was successful</span>
+python <span class="nt">-c</span> <span class="s1">'from caffe2.python import core'</span> 2&gt;/dev/null <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">"Success"</span> <span class="o">||</span> <span class="nb">echo</span> <span class="s2">"Failure"</span>
+<span class="c">#=&gt; Success</span>
+
+<span class="c"># To check if Caffe2 GPU build was successful</span>
+<span class="c"># This must print a number &gt; 0 in order to use Detectron</span>
+python2 <span class="nt">-c</span> <span class="s1">'from caffe2.python import workspace; print(workspace.NumCudaDevices())'</span>
+<span class="c">#=&gt; n</span></code></pre></figure>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/categories/#caffe2" class="page__taxonomy-item" rel="tag">caffe2</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/categories/#cuda" class="page__taxonomy-item" rel="tag">CUDA</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/categories/#cudnn" class="page__taxonomy-item" rel="tag">cuDNN</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-02-19T16:10:00+08:00">February 19, 2018</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Installing+Caffe2+with+CUDA+on+Anaconda+2%20http%3A%2F%2Flocalhost%3A4000%2Fcaffe2%2Fcuda%2Fcudnn%2Finstalling-caffe2-with-cuda-on-anaconda2%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fcaffe2%2Fcuda%2Fcudnn%2Finstalling-caffe2-with-cuda-on-anaconda2%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2Fcaffe2%2Fcuda%2Fcudnn%2Finstalling-caffe2-with-cuda-on-anaconda2%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fcaffe2%2Fcuda%2Fcudnn%2Finstalling-caffe2-with-cuda-on-anaconda2%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda2/" rel="permalink">Installing Caffe2 with CUDA on Anaconda 2
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">It is often the case in research labs that you do not get access to admin priviledges and so installation of AI tools can be nerve-racking.
+The following gui...</p>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+</div>
+
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/jin-zhe"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 JIN ZHE. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="http://localhost:4000/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>

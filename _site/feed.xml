@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-02-19T18:10:11+08:00</updated><id>http://localhost:4000/</id><title type="html">JIN ZHE’s blog</title><subtitle>Jin Zhe's nugets.</subtitle><author><name>Jin Zhe</name></author><entry><title type="html">Installing Caffe2 with CUDA on Anaconda 2</title><link href="http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda2/" rel="alternate" type="text/html" title="Installing Caffe2 with CUDA on Anaconda 2" /><published>2018-02-19T16:10:00+08:00</published><updated>2018-02-19T16:10:00+08:00</updated><id>http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda2</id><content type="html" xml:base="http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda2/">&lt;p&gt;It is often the case in research labs that you do not get access to admin priviledges and so installation of AI tools can be nerve-racking.
+The following guide shows you how to install install &lt;a href=&quot;https://github.com/caffe2/caffe2&quot;&gt;Caffe2&lt;/a&gt; with CUDA under the Anaconda 2 virtual environment without needing to use &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo&lt;/code&gt;. This guide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUs with CUDA support. As caffe2 is best supported on Python 2 at the time of this writing, this installation guide is written for Python 2.7.&lt;/p&gt;
+
+&lt;h1 id=&quot;guide&quot;&gt;Guide&lt;/h1&gt;
+&lt;p&gt;Find out your CUDA version by running the following command&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /usr/local/cuda/version.txt
+&lt;span class=&quot;c&quot;&gt;#=&amp;gt; CUDA Version 8.0.61&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Download the NVIDIA cuDNN &lt;a href=&quot;https://developer.nvidia.com/cudnn&quot;&gt;here&lt;/a&gt; corresponding to your CUDA version. You’ll be requried to sign up for a free developer account if you have not already done so. Be sure to download via the link that reads something like &lt;code class=&quot;highlighter-rouge&quot;&gt;cuDNN v7.0.5 Library for Linux&lt;/code&gt;. Do not download the &lt;code class=&quot;highlighter-rouge&quot;&gt;.deb&lt;/code&gt; version as you’ll need admin privilege to install that. The file I downloaded was named &lt;code class=&quot;highlighter-rouge&quot;&gt;cudnn-8.0-linux-x64-v7.tgz&lt;/code&gt; and we are going to extract its contents into the home directory&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# cd your_download_directory&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-zxvf&lt;/span&gt; cudnn-8.0-linux-x64-v7.tgz &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; ~/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This should create a &lt;code class=&quot;highlighter-rouge&quot;&gt;~/cuda&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;p&gt;Now let’s install &lt;strong&gt;Anaconda 2&lt;/strong&gt; via the download page &lt;a href=&quot;https://www.anaconda.com/download/#linux&quot;&gt;here&lt;/a&gt;.  The “2” simply means it’s for Python 2 so don’t download Anaconda 3 that is meant for Python 3.
+My downloaded file was a shell script called &lt;code class=&quot;highlighter-rouge&quot;&gt;Anaconda2-5.0.1-Linux-x86_64.sh&lt;/code&gt;. Let’s run it&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;bash Anaconda-latest-Linux-x86_64.sh&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Be sure to run a first update right after installation&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda update conda&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Let’s create a virtual Anaconda environment called “caffe2”.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda create &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; caffe2 &lt;span class=&quot;nv&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2.7 anaconda&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;em&gt;You many of course use a different environment name, just be sure to adjust accordingly for the rest of this guide&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;After it prepares the environment and installs the defaults, activate the virtual environment via&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;activate caffe2
+&lt;span class=&quot;c&quot;&gt;# to deactivate: source deactivate caffe2&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now let’s install the necessary dependencies in our current caffe2 environment:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda install &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; future gflags glog lmdb mkl mkl-include numpy opencv protobuf snappy six cmake&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Let’s clone the caffe2’s repo into our home directory.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~ &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; git clone &lt;span class=&quot;nt&quot;&gt;--recursive&lt;/span&gt; https://github.com/caffe2/caffe2.git &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;caffe2&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We shall avoid polluting the caffe2 source tree by building within build a folder&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mkdir build &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;build&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We shall now build the package using CMake with the following flags&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;cmake &lt;span class=&quot;nt&quot;&gt;-DCUDNN_INCLUDE_DIR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/cuda/include &lt;span class=&quot;nt&quot;&gt;-DCUDNN_LIBRARY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/cuda/lib64/libcudnn.so &lt;span class=&quot;nt&quot;&gt;-DCMAKE_PREFIX_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/anaconda2/envs/caffe2 &lt;span class=&quot;nt&quot;&gt;-DCMAKE_INSTALL_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/anaconda2/envs/caffe2 ..&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CMAKE_PREFIX_PATH&lt;/code&gt; tells CMake to look for packages in your conda environment before looking in system install locations (like &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CMAKE_INSTALL_PREFIX&lt;/code&gt; tells CMake where to install Caffe2 binaries such as &lt;code class=&quot;highlighter-rouge&quot;&gt;libcaffe2.dylib&lt;/code&gt; after Caffe2 has been successfully built, the default is &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local&lt;/code&gt; which will require administrator privilege&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Let’s find out how many cores your machine has&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /proc/cpuinfo | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;processor | wc &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#=&amp;gt; n&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Let’s &lt;code class=&quot;highlighter-rouge&quot;&gt;make&lt;/code&gt; the package efficiently by maximising the number of jobs for it. General rule of thumb is to use 1 + n number of jobs where n is the output from the previous command. i.e. number of cores. Mine was 24 so I run the following&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;make &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; 25&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;After make is completed, we are now finally ready to install&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;make install&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You’d think we’re done, but not quite! For some reason python will not know where to look for the caffe2 python modules. I’m not sure why is this and if you do know how to fix it in the installation process, please let me know! My fix is to point the &lt;code class=&quot;highlighter-rouge&quot;&gt;$PYTHONPATH&lt;/code&gt; environment variable to our caffe2 build folder. To do this, append the following line to your &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.bashrc&lt;/code&gt; using your favorite text editor&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PYTHONPATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/caffe2/build&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Reload the shell&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; ~/.bashrc&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We are now ready to test if caffe2 has installed correctly&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~
+&lt;span class=&quot;c&quot;&gt;# To check if Caffe2 build was successful&lt;/span&gt;
+python &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'from caffe2.python import core'&lt;/span&gt; 2&amp;gt;/dev/null &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Success&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Failure&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#=&amp;gt; Success&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# To check if Caffe2 GPU build was successful&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# This must print a number &amp;gt; 0 in order to use Detectron&lt;/span&gt;
+python2 &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'from caffe2.python import workspace; print(workspace.NumCudaDevices())'&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#=&amp;gt; n&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Jin Zhe</name></author><summary type="html">It is often the case in research labs that you do not get access to admin priviledges and so installation of AI tools can be nerve-racking. The following guide shows you how to install install Caffe2 with CUDA under the Anaconda 2 virtual environment without needing to use sudo. This guide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUs with CUDA support. As caffe2 is best supported on Python 2 at the time of this writing, this installation guide is written for Python 2.7.</summary></entry></feed>
