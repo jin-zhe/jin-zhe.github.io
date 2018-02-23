@@ -4,8 +4,8 @@ title:  "Installing Caffe2 with CUDA on Anaconda 2"
 date:   2018-02-19 16:10:00 +0800
 categories: caffe2 CUDA cuDNN
 ---
-It is often the case in research labs that you do not get access to admin priviledges and so installation of AI tools can be nerve-racking.
-The following guide shows you how to install install [Caffe2][caffe2] with CUDA under the Anaconda 2 virtual environment without needing to use `sudo`. This guide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUs with CUDA support. As caffe2 is best supported on Python 2 at the time of this writing, this installation guide is written for Python 2.7.
+It is often the case in research labs that you do not get admin access to GPU servers and so installation of AI tools can be a little nerve-racking.
+The following guide shows you how to install install [Caffe2][caffe2] with CUDA under the Anaconda 2 virtual environment without needing to use `sudo`. This guide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUs with CUDA support. i.e it assumes CUDA is already installed by a system admin. As caffe2 is best supported on Python 2 at the time of this writing, this installation guide is written for Python 2.7.
 
 # Guide
 Find out your CUDA version by running the following command
@@ -82,14 +82,14 @@ After make is completed, we are now finally ready to install
 make install
 {% endhighlight %}
 
-You'd think we're done, but not quite! For some reason python will not know where to look for the caffe2 python modules. I'm not sure why is this and if you do know how to fix it in the installation process, please let me know! My fix is to point the `$PYTHONPATH` environment variable to our caffe2 build folder. To do this, append the following line to your `~/.bashrc` using your favorite text editor
+You'd think we're done, but not quite! For some reason python will not know where to look for the caffe2 python modules. I'm not sure why is this and if you do know how to fix it in the installation process, please let me know! My fix is to point the `$PYTHONPATH` environment variable to our caffe2 build folder. To do this, append the following line to your `~/.bash_profile` using your favorite text editor. The reason why I'm using `.bash_profile` instead of `.bashrc` is that `.bash_profile` is automatically executed for login shells and is idempotent so it's perfect for remote `ssh` access, which is the scenario I'm assuming here. You don't want to run `source ~/.bashrc` everytime you `ssh` into the server. If you're running command prompt on a local machine however, then feel free to use `.bashrc`
 {% highlight bash %}
-export PYTHONPATH=~/caffe2/build
+export PYTHONPATH="~/caffe2/build:$PYTHONPATH"
 {% endhighlight %}
 
 Reload the shell
 {% highlight bash %}
-source ~/.bashrc
+source ~/.bash_profile
 {% endhighlight %}
 
 We are now ready to test if caffe2 has installed correctly
@@ -102,7 +102,7 @@ python -c 'from caffe2.python import core' 2>/dev/null && echo "Success" || echo
 # To check if Caffe2 GPU build was successful
 # This must print a number > 0 in order to use Detectron
 python2 -c 'from caffe2.python import workspace; print(workspace.NumCudaDevices())'
-#=> n
+#=> 1
 {% endhighlight %}
 
 [caffe2]: https://github.com/caffe2/caffe2
