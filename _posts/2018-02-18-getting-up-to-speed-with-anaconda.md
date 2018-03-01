@@ -1,7 +1,7 @@
 ---
 layout: single
 title:  "Getting up to speed with Anaconda"
-date:   2018-02-28 16:10:00 +0800
+date:   2018-02-18 16:10:00 +0800
 categories: anaconda conda
 ---
 [Anaconda][anaconda] is a freemium open-source software for Python and R and it
