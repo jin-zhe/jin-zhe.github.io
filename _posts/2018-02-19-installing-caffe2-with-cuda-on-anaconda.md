@@ -17,11 +17,6 @@ installation guide is written for Python 2.7.
 * NVIDIA GPU
 * Anaconda 2 (see installation instructions [here][anaconda-guide])
 * CUDA (*installed by system admin*)
-Find out your CUDA version by running the following command
-{% highlight bash %}
-cat /usr/local/cuda/version.txt
-#=> CUDA Version 8.0.61
-{% endhighlight %}
 
 # Guide
 Find out your CUDA version by running the following command
@@ -78,9 +73,12 @@ We shall now build the package using CMake with the following flags
 {% highlight bash %}
 cmake -DCUDNN_INCLUDE_DIR=~/cuda/include -DCUDNN_LIBRARY=~/cuda/lib64/libcudnn.so -DCMAKE_PREFIX_PATH=~/anaconda2/envs/caffe2 -DCMAKE_INSTALL_PREFIX=~/anaconda2/envs/caffe2 ..
 {% endhighlight %}
-* `CMAKE_PREFIX_PATH` tells CMake to look for packages in your conda environment
+* CMake variable  `CUDNN_INCLUDE_DIR` indicates where to find the `include` directory for your
+cuDNN
+* CMake variable  `CUDNN_LIBRARY` indicates where to find the `libcudnn.so` for your cuDNN
+* CMake variable  `CMAKE_PREFIX_PATH` tells CMake to look for packages in your conda environment
 before looking in system install locations (like `/usr/local`)
-* `CMAKE_INSTALL_PREFIX` tells CMake where to install Caffe2 binaries such as
+* CMake variable  `CMAKE_INSTALL_PREFIX` indicates where to install Caffe2 binaries such as
 `libcaffe2.dylib` after Caffe2 has been successfully built, the default is
 `/usr/local` which will require administrator privilege
 
@@ -104,23 +102,51 @@ make install
 
 You'd think we're done, but not quite! For some reason python will not know
 where to look for the caffe2 python modules. I'm not sure why is this and if you
-do know how to fix it in the installation process, please let me know! My fix is
-to point the `$PYTHONPATH` environment variable to our caffe2 build folder. To
-do this, append the following line to your `~/.bash_profile` using your favorite
-text editor.
+do know how to fix it in the installation process, please let me know! We have
+to point the `$PYTHONPATH` environment variable to our caffe2 build folder
 {% highlight bash %}
-export PYTHONPATH="~/caffe2/build:$PYTHONPATH"
+export PYTHONPATH=$HOME/caffe2/build:$PYTHONPATH
 {% endhighlight %}
-The reason why I'm using `.bash_profile` instead of `.bashrc` is that
-`.bash_profile` is automatically executed for login shells and is idempotent so
-it's perfect for remote `ssh` access, which is the scenario I'm assuming here.
-You don't want to run `source ~/.bashrc` everytime you `ssh` into the server. If
-you're running command prompt on a local machine however, then feel free to use
-`.bashrc`
+However it will be tedious to type that everytime we activate our environment.
+You may append that line to `.bash_profile` or `.bashrc` but some variables
+such as `$PYTHONPATH` are potentially used in many environments and it could
+lead to python import errors when the paths contain different modules sharing
+the same name. For instance, both caffe and caffe 2 contain a module named
+'caffe'.
 
-Reload the shell
+The solution to overcome this is to write a script to save our environment
+variables within our environemnt so that they get loaded automatically every
+time we activate our environment and get unset automatically when we deactivate
+our environment. I shall highlight the
+[guide](https://conda.io/docs/user-guide/tasks/manage-environments.html#macos-and-linux)
+stated in the official Anaconda documentation.
+
+Let's enter our environment directory and do the following
 {% highlight bash %}
-source ~/.bash_profile
+cd ~/anaconda2/envs/caffe2
+mkdir -p ./etc/conda/activate.d
+mkdir -p ./etc/conda/deactivate.d
+touch ./etc/conda/activate.d/env_vars.sh
+touch ./etc/conda/deactivate.d/env_vars.sh
+{% endhighlight %}
+
+Edit `./etc/conda/activate.d/env_vars.sh` as follows:
+{% highlight bash %}
+#!/bin/sh
+
+export PYTHONPATH=$HOME/caffe2/build:$PYTHONPATH
+{% endhighlight %}
+
+Edit `./etc/conda/deactivate.d/env_vars.sh` as follows:
+{% highlight bash %}
+#!/bin/sh
+
+unset PYTHONPATH
+{% endhighlight %}
+
+Now let's reload the current environment to reflect the variables
+{% highlight bash %}
+source activate caffe2
 {% endhighlight %}
 
 We are now ready to test if caffe2 has installed correctly

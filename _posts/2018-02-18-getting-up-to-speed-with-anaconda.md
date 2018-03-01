@@ -136,9 +136,9 @@ While this may work well on a local machine, it's not ideal if Anaconda was
 installed on a remote server we `ssh` into. This is because `~/.bashrc` is
 only automatically executed for interactive non-login shells and not for login
 shells. In light of this, `~/.bash_profile` is a much better candidate to store
-this environment variable. Running `~/.bash_profile` is also an idempotent
-operation, meaning that running it over and over again will not prepend
-repetitions to `$PATH`. TL;DR, if you're running on `ssh`, I'd suggest you cut
+this environment variable export command.
+
+TL;DR, if you're running on `ssh`, I'd suggest you cut
 and past that bit of export code from `~/.bashrc` to `~/.bash_profile`. After
 you're done, be sure to run `source ~/.bash_profile`
 
