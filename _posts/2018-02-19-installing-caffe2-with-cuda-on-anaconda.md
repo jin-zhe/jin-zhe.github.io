@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "Installing Caffe2 with CUDA on Anaconda 2"
+title:  "Installing Caffe2 with CUDA on Anaconda"
 date:   2018-02-19 16:10:00 +0800
 categories: caffe2 CUDA cuDNN
 ---
@@ -111,7 +111,7 @@ However it will be tedious to type that everytime we activate our environment.
 You may append that line to `.bash_profile` or `.bashrc` but some variables
 such as `$PYTHONPATH` are potentially used in many environments and it could
 lead to python import errors when the paths contain different modules sharing
-the same name. For instance, both caffe and caffe 2 contain a module named
+the same name. For instance, both caffe and caffe2 contain a module named
 'caffe'.
 
 The solution to overcome this is to write a script to save our environment
@@ -163,5 +163,5 @@ python2 -c 'from caffe2.python import workspace; print(workspace.NumCudaDevices(
 {% endhighlight %}
 
 [caffe2]: https://github.com/caffe2/caffe2
-[anaconda-guide]: {% post_url 2018-02-19-getting-up-to-speed-with-anaconda %}
+[anaconda-guide]: {% post_url 2018-02-18-getting-up-to-speed-with-anaconda %}
 [download-cuDNN]: https://developer.nvidia.com/cudnn

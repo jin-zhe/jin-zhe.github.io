@@ -1,0 +1,605 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.10.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Getting up to speed with Anaconda - JIN ZHE’s blog</title>
+<meta name="description" content="Anaconda is a freemium open-source software for Python and R and itis widely used in scientific computing. It provides a virtual environmentmanager and it also comes with its own package management ecosystem conda. Whydoes this matter you ask? Be it in academic or industrial research labs, it isoften the case that you are not granted admin access to GPU servers. Since youwon’t have the ability to do sudo apt-get, the installation of AI tools can bequite nerve-racking.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="JIN ZHE's blog">
+<meta property="og:title" content="Getting up to speed with Anaconda">
+<meta property="og:url" content="http://localhost:4000/anaconda/conda/getting-up-to-speed-with-anaconda/">
+
+
+  <meta property="og:description" content="Anaconda is a freemium open-source software for Python and R and itis widely used in scientific computing. It provides a virtual environmentmanager and it also comes with its own package management ecosystem conda. Whydoes this matter you ask? Be it in academic or industrial research labs, it isoften the case that you are not granted admin access to GPU servers. Since youwon’t have the ability to do sudo apt-get, the installation of AI tools can bequite nerve-racking.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2018-02-18T16:10:00+08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/anaconda/conda/getting-up-to-speed-with-anaconda/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "JIN ZHE",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="JIN ZHE's blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="http://localhost:4000/">JIN ZHE's blog</a>
+        <ul class="visible-links">
+          
+        </ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="http://localhost:4000/assets/images/bio-photo.png" alt="Jin Zhe" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Jin Zhe</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        I code.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Singapore</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/https://github.com/jin-zhe" itemprop="sameAs">
+            <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Getting up to speed with Anaconda">
+    <meta itemprop="description" content="Anaconda is a freemium open-source software for Python and R and itis widely used in scientific computing. It provides a virtual environmentmanager and it also comes with its own package management ecosystem conda. Whydoes this matter you ask? Be it in academic or industrial research labs, it isoften the case that you are not granted admin access to GPU servers. Since youwon’t have the ability to do sudo apt-get, the installation of AI tools can bequite nerve-racking.">
+    <meta itemprop="datePublished" content="February 18, 2018">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Getting up to speed with Anaconda
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p><a href="https://www.anaconda.com/">Anaconda</a> is a freemium open-source software for Python and R and it
+is widely used in scientific computing. It provides a virtual environment
+manager and it also comes with its own package management ecosystem conda. Why
+does this matter you ask? Be it in academic or industrial research labs, it is
+often the case that you are not granted admin access to GPU servers. Since you
+won’t have the ability to do <code class="highlighter-rouge">sudo apt-get</code>, the installation of AI tools can be
+quite nerve-racking.</p>
+
+<p>Anaconda’s virtualization is much more <em>encompassing</em> than say Python’s
+virtualenv. For instance you can install <a href="https://cmake.org/">CMake</a> in an Anaconda
+environment and start building tools from source. It goes without saying that
+you no longer have much reasons to use Python’s virtualenv once you’re on
+Anaconda.</p>
+
+<p>I shall walk you through installing Anaconda and get you up to speed with the
+most common and frequently used commands. Since <em>most</em> scientific packages out
+in the wild offers the best support and stability for Python 2.7, I shall assume
+that version of Python in this guide.</p>
+
+<h1 id="installation">Installation</h1>
+<p>Let’s install <strong>Anaconda 2</strong> via the download page [here][download-anaconda].
+The “2” simply means it’s for Python 2 so don’t download Anaconda 3 that is
+meant for Python 3!</p>
+
+<p>My downloaded file was a shell script called <code class="highlighter-rouge">Anaconda2-5.0.1-Linux-x86_64.sh</code>.
+Let’s run it</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">bash Anaconda-latest-Linux-x86_64.sh</code></pre></figure>
+
+<p>Be sure to run a first update right after installation</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda update conda</code></pre></figure>
+
+<p>We are done!</p>
+
+<h1 id="quick-start">Quick Start</h1>
+<p>Let’s start by creating a virtual environment and installing CMake in it!</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># conda create --name &lt;environment-name&gt; &lt;python-packages&gt;</span>
+conda create <span class="nt">-n</span> magical_schoolbus <span class="nv">python</span><span class="o">=</span>2.7 anaconda</code></pre></figure>
+
+<ul>
+  <li><code class="highlighter-rouge">-n</code>, <code class="highlighter-rouge">--name</code> flag indicates the name for the environemt we wish to create</li>
+  <li><code class="highlighter-rouge">python=2.7</code> indicates our Python version for this environment</li>
+  <li>The trailing <code class="highlighter-rouge">anaconda</code> in the end indicates that we wish to initialize our
+environment with the ‘anaconda’ meta-package. This is entirely optional!</li>
+</ul>
+
+<p>Once the new environemnt is prepared, let’s clean up the installation cache</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda clean <span class="nt">--all</span></code></pre></figure>
+
+<p>We can see a list of all the environments we have created via</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda info <span class="nt">--envs</span></code></pre></figure>
+
+<p>Since we have only created one environemnt, we should only see
+<code class="highlighter-rouge">magical_schoolbus</code>. We are now ready to hop onboard!</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">source </span>activate magical_schoolbus</code></pre></figure>
+
+<p>Let’s take a look at which are the programmes currently installed in our
+environment</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda list</code></pre></figure>
+
+<p>It appears that <code class="highlighter-rouge">CMake</code> isn’t in the list. Let’s check if it’s available for
+download. To search for packages to install, you may either search
+<a href="https://www.anaconda.com/">conda cloud</a> on your browser or via the command line like so</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda search cmake</code></pre></figure>
+
+<p>Horray! CMake is available! We may proceed to install it in our current virtual
+environment</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># conda install --channel &lt;channel-name&gt; --name &lt;environment-name&gt; &lt;package-name&gt;</span>
+conda install cmake <span class="nt">-y</span></code></pre></figure>
+
+<ul>
+  <li>The <code class="highlighter-rouge">-y</code>, <code class="highlighter-rouge">--yes</code> flag simply automates the ‘yes’ approval from you to install
+the packages</li>
+  <li>If you wish to install in another virtual environment, simply use the <code class="highlighter-rouge">-n</code>,
+<code class="highlighter-rouge">--name</code>  flag</li>
+  <li><code class="highlighter-rouge">-c</code>, <code class="highlighter-rouge">--channel</code> indicates additional channel to  search  for  packages if
+you do not wish to install from default packages</li>
+</ul>
+
+<p>To uninstall a package, simply do</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda uninstall some_package</code></pre></figure>
+
+<p>Finally when our work is complete, we may leave the virtual world like so</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">source </span>deactivate</code></pre></figure>
+
+<p>To destroy an environment, input command</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda remove <span class="nt">--name</span> myenv <span class="nt">--all</span></code></pre></figure>
+
+<p>OR via its alias</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda env remove <span class="nt">--name</span> myenv</code></pre></figure>
+
+<p>To rename an environment, simply clone the current environment into another
+with the desired name and thereafter removing the old environment. Note that
+this is a potentially time and space consuming operation</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">source </span>deactivate <span class="c"># be sure to exit virtual environment first!</span>
+conda create <span class="nt">--name</span> new_name <span class="nt">--clone</span> old_name
+conda remove <span class="nt">--name</span> old_name <span class="nt">--all</span></code></pre></figure>
+
+<p>That’s all folks! Be sure to check out the official <a href="https://conda.io/docs/">docs</a> for the
+latest and complete documentation.</p>
+
+<h1 id="note">NOTE</h1>
+<p>After installation, Anaconda will automatically add the following to your
+<code class="highlighter-rouge">~/.bashrc</code></p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># added by Anaconda2 installer</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/anaconda2/bin:</span><span class="nv">$PATH</span><span class="s2">"</span></code></pre></figure>
+
+<p>While this may work well on a local machine, it’s not ideal if Anaconda was
+installed on a remote server we <code class="highlighter-rouge">ssh</code> into. This is because <code class="highlighter-rouge">~/.bashrc</code> is
+only automatically executed for interactive non-login shells and not for login
+shells. In light of this, <code class="highlighter-rouge">~/.bash_profile</code> is a much better candidate to store
+this environment variable export command.</p>
+
+<p>TL;DR, if you’re running on <code class="highlighter-rouge">ssh</code>, I’d suggest you cut
+and past that bit of export code from <code class="highlighter-rouge">~/.bashrc</code> to <code class="highlighter-rouge">~/.bash_profile</code>. After
+you’re done, be sure to run <code class="highlighter-rouge">source ~/.bash_profile</code></p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/categories/#anaconda" class="page__taxonomy-item" rel="tag">anaconda</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/categories/#conda" class="page__taxonomy-item" rel="tag">conda</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-02-18T16:10:00+08:00">February 18, 2018</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Getting+up+to+speed+with+Anaconda%20http%3A%2F%2Flocalhost%3A4000%2Fanaconda%2Fconda%2Fgetting-up-to-speed-with-anaconda%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fanaconda%2Fconda%2Fgetting-up-to-speed-with-anaconda%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2Fanaconda%2Fconda%2Fgetting-up-to-speed-with-anaconda%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fanaconda%2Fconda%2Fgetting-up-to-speed-with-anaconda%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda/" class="pagination--pager" title="Installing Caffe2 with CUDA on Anaconda
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/caffe/cuda/cudnn/installing-caffe-with-cuda-on-anaconda/" rel="permalink">Installing Caffe with CUDA on Anaconda
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">The following guide shows you how to install install Caffe with CUDA
+under the Anaconda 2 virtual environment.
+
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda/" rel="permalink">Installing Caffe2 with CUDA on Anaconda
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">The following guide shows you how to install install Caffe2 with CUDA
+under the Anaconda 2 virtual environment without needing to use sudo. This
+guide is mea...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/anaconda/conda/getting-up-to-speed-with-anaconda/" rel="permalink">Getting up to speed with Anaconda
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Anaconda is a freemium open-source software for Python and R and it
+is widely used in scientific computing. It provides a virtual environment
+manager and it ...</p>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+</div>
+
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/jin-zhe"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 JIN ZHE. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="http://localhost:4000/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>

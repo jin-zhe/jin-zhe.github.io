@@ -1,5 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-02-19T18:10:11+08:00</updated><id>http://localhost:4000/</id><title type="html">JIN ZHE’s blog</title><subtitle>Jin Zhe's nugets.</subtitle><author><name>Jin Zhe</name></author><entry><title type="html">Installing Caffe2 with CUDA on Anaconda 2</title><link href="http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda2/" rel="alternate" type="text/html" title="Installing Caffe2 with CUDA on Anaconda 2" /><published>2018-02-19T16:10:00+08:00</published><updated>2018-02-19T16:10:00+08:00</updated><id>http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda2</id><content type="html" xml:base="http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda2/">&lt;p&gt;It is often the case in research labs that you do not get access to admin priviledges and so installation of AI tools can be nerve-racking.
-The following guide shows you how to install install &lt;a href=&quot;https://github.com/caffe2/caffe2&quot;&gt;Caffe2&lt;/a&gt; with CUDA under the Anaconda 2 virtual environment without needing to use &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo&lt;/code&gt;. This guide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUs with CUDA support. As caffe2 is best supported on Python 2 at the time of this writing, this installation guide is written for Python 2.7.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-01T14:37:49+08:00</updated><id>http://localhost:4000/</id><title type="html">JIN ZHE’s blog</title><subtitle>Jin Zhe's nugets.</subtitle><author><name>Jin Zhe</name></author><entry><title type="html">Installing Caffe with CUDA on Anaconda</title><link href="http://localhost:4000/caffe/cuda/cudnn/installing-caffe-with-cuda-on-anaconda/" rel="alternate" type="text/html" title="Installing Caffe with CUDA on Anaconda" /><published>2018-02-28T16:10:00+08:00</published><updated>2018-02-28T16:10:00+08:00</updated><id>http://localhost:4000/caffe/cuda/cudnn/installing-caffe-with-cuda-on-anaconda</id><content type="html" xml:base="http://localhost:4000/caffe/cuda/cudnn/installing-caffe-with-cuda-on-anaconda/">&lt;p&gt;The following guide shows you how to install install &lt;a href=&quot;http://caffe.berkeleyvision.org&quot;&gt;Caffe&lt;/a&gt; with CUDA
+under the Anaconda 2 virtual environment.&lt;/p&gt;
+
+&lt;h1 id=&quot;assumptions&quot;&gt;Assumptions&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ubuntu OS&lt;/li&gt;
+  &lt;li&gt;NVIDIA GPU with CUDA support&lt;/li&gt;
+  &lt;li&gt;Anaconda 2 (see installation instructions &lt;a href=&quot;/anaconda/conda/getting-up-to-speed-with-anaconda/&quot;&gt;here&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;CUDA (&lt;em&gt;installed by system admin&lt;/em&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;specifications&quot;&gt;Specifications&lt;/h1&gt;
+&lt;p&gt;This guide is written for the following specs:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ubuntu 16.04&lt;/li&gt;
+  &lt;li&gt;Python 2.7&lt;/li&gt;
+  &lt;li&gt;CUDA 8&lt;/li&gt;
+  &lt;li&gt;Anaconda 2&lt;/li&gt;
+  &lt;li&gt;OpenCV3&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h1 id=&quot;guide&quot;&gt;Guide&lt;/h1&gt;
 &lt;p&gt;Find out your CUDA version by running the following command&lt;/p&gt;
@@ -7,42 +25,181 @@ The following guide shows you how to install install &lt;a href=&quot;https://gi
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /usr/local/cuda/version.txt
 &lt;span class=&quot;c&quot;&gt;#=&amp;gt; CUDA Version 8.0.61&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Download the NVIDIA cuDNN &lt;a href=&quot;https://developer.nvidia.com/cudnn&quot;&gt;here&lt;/a&gt; corresponding to your CUDA version. You’ll be requried to sign up for a free developer account if you have not already done so. Be sure to download via the link that reads something like &lt;code class=&quot;highlighter-rouge&quot;&gt;cuDNN v7.0.5 Library for Linux&lt;/code&gt;. Do not download the &lt;code class=&quot;highlighter-rouge&quot;&gt;.deb&lt;/code&gt; version as you’ll need admin privilege to install that. The file I downloaded was named &lt;code class=&quot;highlighter-rouge&quot;&gt;cudnn-8.0-linux-x64-v7.tgz&lt;/code&gt; and we are going to extract its contents into the home directory&lt;/p&gt;
+&lt;p&gt;Download the NVIDIA cuDNN &lt;a href=&quot;https://developer.nvidia.com/cudnn&quot;&gt;here&lt;/a&gt; corresponding to your CUDA
+version. You’ll be requried to sign up for a free developer account if you have
+not already done so. Be sure to download via the link that reads something like
+&lt;code class=&quot;highlighter-rouge&quot;&gt;cuDNN v7.0.5 Library for Linux&lt;/code&gt;. Do not download the &lt;code class=&quot;highlighter-rouge&quot;&gt;.deb&lt;/code&gt; version as you’ll
+need admin privilege to install that. The file I downloaded was named
+&lt;code class=&quot;highlighter-rouge&quot;&gt;cudnn-8.0-linux-x64-v7.tgz&lt;/code&gt; and we are going to extract its contents into the
+home directory&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# cd your_download_directory&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-zxvf&lt;/span&gt; cudnn-8.0-linux-x64-v7.tgz &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; ~/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;This should create a &lt;code class=&quot;highlighter-rouge&quot;&gt;~/cuda&lt;/code&gt; directory.&lt;/p&gt;
 
-&lt;p&gt;Now let’s install &lt;strong&gt;Anaconda 2&lt;/strong&gt; via the download page &lt;a href=&quot;https://www.anaconda.com/download/#linux&quot;&gt;here&lt;/a&gt;.  The “2” simply means it’s for Python 2 so don’t download Anaconda 3 that is meant for Python 3.
-My downloaded file was a shell script called &lt;code class=&quot;highlighter-rouge&quot;&gt;Anaconda2-5.0.1-Linux-x86_64.sh&lt;/code&gt;. Let’s run it&lt;/p&gt;
+&lt;p&gt;Let’s create a virtual Anaconda environment called “caffe”.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;bash Anaconda-latest-Linux-x86_64.sh&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda create &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; caffe &lt;span class=&quot;nv&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2.7 anaconda&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Be sure to run a first update right after installation&lt;/p&gt;
+&lt;p&gt;After it prepares the environment and installs the defaults, activate the
+virtual environment via&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda update conda&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;activate caffe&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now let’s install the necessary dependencies in our current caffe environment:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda install lmdb openblas glog gflags hdf5 protobuf leveldb boost cmake &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+conda install &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; menpo opencv3 &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Let’s clone the caffe’s repo into our home directory.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~ &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; git clone &lt;span class=&quot;nt&quot;&gt;--recursive&lt;/span&gt; https://github.com/BVLC/caffe &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;caffe&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We shall avoid polluting the caffe source tree by building within build a folder&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mkdir build &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;build&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We shall now build the package using CMake with the following flags&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;cmake &lt;span class=&quot;nt&quot;&gt;-DBLAS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;open &lt;span class=&quot;nt&quot;&gt;-DCUDNN_INCLUDE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/cuda/include/ &lt;span class=&quot;nt&quot;&gt;-DCUDNN_LIBRARY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/cuda/lib64/libcudnn.so &lt;span class=&quot;nt&quot;&gt;-DCMAKE_PREFIX_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/anaconda2/envs/caffe &lt;span class=&quot;nt&quot;&gt;-DCMAKE_INSTALL_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/anaconda2/envs/caffe ..&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CMake variable &lt;code class=&quot;highlighter-rouge&quot;&gt;BLAS=open&lt;/code&gt; indicates that we would like use OpenBLAS instead of the default
+which is ATLAS&lt;/li&gt;
+  &lt;li&gt;CMake variable &lt;code class=&quot;highlighter-rouge&quot;&gt;CUDNN_INCLUDE&lt;/code&gt; indicates where to find the &lt;code class=&quot;highlighter-rouge&quot;&gt;include&lt;/code&gt; directory for your
+cuDNN&lt;/li&gt;
+  &lt;li&gt;CMake variable &lt;code class=&quot;highlighter-rouge&quot;&gt;CUDNN_LIBRARY&lt;/code&gt; indicates where to find the library path for your cuDNN&lt;/li&gt;
+  &lt;li&gt;CMake variable  &lt;code class=&quot;highlighter-rouge&quot;&gt;CMAKE_PREFIX_PATH&lt;/code&gt; tells CMake to look for packages in your conda environment
+before looking in system install locations (like &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;CMake variable  &lt;code class=&quot;highlighter-rouge&quot;&gt;CMAKE_INSTALL_PREFIX&lt;/code&gt; indicates where to install Caffe binaries&lt;/li&gt;
+  &lt;li&gt;Also see the &lt;a href=&quot;https://github.com/BVLC/caffe/pull/1667&quot;&gt;list of the available make flags&lt;/a&gt; and their default
+values&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Let’s find out how many cores your machine has&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /proc/cpuinfo | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;processor | wc &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#=&amp;gt; n&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Let’s &lt;code class=&quot;highlighter-rouge&quot;&gt;make&lt;/code&gt; the package efficiently by maximising the number of jobs for it.
+General rule of thumb is to use 1 + n number of jobs where n is the output from
+the previous command. i.e. number of cores. Mine was 24 so I run the following&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;make all &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; 25&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;After make is completed, we are now finally ready to install&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;make install&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You’d think we’re done, but not quite! For some reason python will not know
+where to look for the caffe python modules. I’m not sure why is this and if you
+do know how to fix it in the installation process, please let me know! We have
+to point the &lt;code class=&quot;highlighter-rouge&quot;&gt;$PYTHONPATH&lt;/code&gt; environment variable to our caffe folder like so&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PYTHONPATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/caffe/python:&lt;span class=&quot;nv&quot;&gt;$PYTHONPATH&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;However it will be tedious to type that everytime we activate our environment.
+You may append that line to &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;.bashrc&lt;/code&gt; but some variables
+such as &lt;code class=&quot;highlighter-rouge&quot;&gt;$PYTHONPATH&lt;/code&gt; are potentially used in many environments and it could
+lead to python import errors when the paths contain different modules sharing
+the same name. For instance, both caffe and caffe2 contain a module named
+‘caffe’.&lt;/p&gt;
+
+&lt;p&gt;The solution to overcome this is to write a script to save our environment
+variables within our environemnt so that they get loaded automatically every
+time we activate our environment and get unset automatically when we deactivate
+our environment. I shall highlight the
+&lt;a href=&quot;https://conda.io/docs/user-guide/tasks/manage-environments.html#macos-and-linux&quot;&gt;guide&lt;/a&gt;
+stated in the official Anaconda documentation.&lt;/p&gt;
+
+&lt;p&gt;Let’s enter our environment directory and do the following&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/anaconda2/envs/caffe
+mkdir &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; ./etc/conda/activate.d
+mkdir &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; ./etc/conda/deactivate.d
+touch ./etc/conda/activate.d/env_vars.sh
+touch ./etc/conda/deactivate.d/env_vars.sh&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Edit &lt;code class=&quot;highlighter-rouge&quot;&gt;./etc/conda/activate.d/env_vars.sh&lt;/code&gt; as follows:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PYTHONPATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/caffe/python:&lt;span class=&quot;nv&quot;&gt;$PYTHONPATH&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Edit &lt;code class=&quot;highlighter-rouge&quot;&gt;./etc/conda/deactivate.d/env_vars.sh&lt;/code&gt; as follows:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;unset &lt;/span&gt;PYTHONPATH&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now let’s reload the current environment to reflect the variables&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;activate caffe&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We are now ready to test if caffe has been installed correctly with CUDA&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~
+&lt;span class=&quot;c&quot;&gt;# To check if Caffe build was successful&lt;/span&gt;
+python &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'import caffe; caffe.set_mode_gpu()'&lt;/span&gt; 2&amp;gt;/dev/null &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Success&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Failure&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#=&amp;gt; Success&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Jin Zhe</name></author><summary type="html">The following guide shows you how to install install Caffe with CUDA under the Anaconda 2 virtual environment.</summary></entry><entry><title type="html">Installing Caffe2 with CUDA on Anaconda</title><link href="http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda/" rel="alternate" type="text/html" title="Installing Caffe2 with CUDA on Anaconda" /><published>2018-02-19T16:10:00+08:00</published><updated>2018-02-19T16:10:00+08:00</updated><id>http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda</id><content type="html" xml:base="http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda/">&lt;p&gt;The following guide shows you how to install install &lt;a href=&quot;https://github.com/caffe2/caffe2&quot;&gt;Caffe2&lt;/a&gt; with CUDA
+under the Anaconda 2 virtual environment without needing to use &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo&lt;/code&gt;. This
+guide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUs
+with CUDA support. i.e it assumes CUDA is already installed by a system admin.
+As caffe2 is best supported on Python 2 at the time of this writing, this
+installation guide is written for Python 2.7.&lt;/p&gt;
+
+&lt;h1 id=&quot;assumptions&quot;&gt;Assumptions&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ubuntu OS&lt;/li&gt;
+  &lt;li&gt;NVIDIA GPU&lt;/li&gt;
+  &lt;li&gt;Anaconda 2 (see installation instructions &lt;a href=&quot;/anaconda/conda/getting-up-to-speed-with-anaconda/&quot;&gt;here&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;CUDA (&lt;em&gt;installed by system admin&lt;/em&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;guide&quot;&gt;Guide&lt;/h1&gt;
+&lt;p&gt;Find out your CUDA version by running the following command&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /usr/local/cuda/version.txt
+&lt;span class=&quot;c&quot;&gt;#=&amp;gt; CUDA Version 8.0.61&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Download the NVIDIA cuDNN &lt;a href=&quot;https://developer.nvidia.com/cudnn&quot;&gt;here&lt;/a&gt; corresponding to your CUDA
+version. You’ll be requried to sign up for a free developer account if you have
+not already done so. Be sure to download via the link that reads something like
+&lt;code class=&quot;highlighter-rouge&quot;&gt;cuDNN v7.0.5 Library for Linux&lt;/code&gt;. Do not download the &lt;code class=&quot;highlighter-rouge&quot;&gt;.deb&lt;/code&gt; version as you’ll
+need admin privilege to install that. The file I downloaded was named
+&lt;code class=&quot;highlighter-rouge&quot;&gt;cudnn-8.0-linux-x64-v7.tgz&lt;/code&gt; and we are going to extract its contents into the
+home directory&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# cd your_download_directory&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-zxvf&lt;/span&gt; cudnn-8.0-linux-x64-v7.tgz &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; ~/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This should create a &lt;code class=&quot;highlighter-rouge&quot;&gt;~/cuda&lt;/code&gt; directory.&lt;/p&gt;
 
 &lt;p&gt;Let’s create a virtual Anaconda environment called “caffe2”.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda create &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; caffe2 &lt;span class=&quot;nv&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2.7 anaconda&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;&lt;em&gt;You many of course use a different environment name, just be sure to adjust accordingly for the rest of this guide&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;You many of course use a different environment name, just be sure to adjust
+accordingly for the rest of this guide&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;After it prepares the environment and installs the defaults, activate the virtual environment via&lt;/p&gt;
+&lt;p&gt;After it prepares the environment and installs the defaults, activate the
+virtual environment via&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;activate caffe2
 &lt;span class=&quot;c&quot;&gt;# to deactivate: source deactivate caffe2&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Now let’s install the necessary dependencies in our current caffe2 environment:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda install &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; future gflags glog lmdb mkl mkl-include numpy opencv protobuf snappy six cmake&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda install &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; future gflags glog lmdb mkl mkl-include numpy opencv protobuf
+snappy six cmake&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Let’s clone the caffe2’s repo into our home directory.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~ &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; git clone &lt;span class=&quot;nt&quot;&gt;--recursive&lt;/span&gt; https://github.com/caffe2/caffe2.git &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;caffe2&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;We shall avoid polluting the caffe2 source tree by building within build a folder&lt;/p&gt;
+&lt;p&gt;We shall avoid polluting the caffe2 source tree by building within a build
+folder&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mkdir build &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;build&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
@@ -51,8 +208,14 @@ My downloaded file was a shell script called &lt;code class=&quot;highlighter-ro
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;cmake &lt;span class=&quot;nt&quot;&gt;-DCUDNN_INCLUDE_DIR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/cuda/include &lt;span class=&quot;nt&quot;&gt;-DCUDNN_LIBRARY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/cuda/lib64/libcudnn.so &lt;span class=&quot;nt&quot;&gt;-DCMAKE_PREFIX_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/anaconda2/envs/caffe2 &lt;span class=&quot;nt&quot;&gt;-DCMAKE_INSTALL_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/anaconda2/envs/caffe2 ..&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CMAKE_PREFIX_PATH&lt;/code&gt; tells CMake to look for packages in your conda environment before looking in system install locations (like &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local&lt;/code&gt;)&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CMAKE_INSTALL_PREFIX&lt;/code&gt; tells CMake where to install Caffe2 binaries such as &lt;code class=&quot;highlighter-rouge&quot;&gt;libcaffe2.dylib&lt;/code&gt; after Caffe2 has been successfully built, the default is &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local&lt;/code&gt; which will require administrator privilege&lt;/li&gt;
+  &lt;li&gt;CMake variable  &lt;code class=&quot;highlighter-rouge&quot;&gt;CUDNN_INCLUDE_DIR&lt;/code&gt; indicates where to find the &lt;code class=&quot;highlighter-rouge&quot;&gt;include&lt;/code&gt; directory for your
+cuDNN&lt;/li&gt;
+  &lt;li&gt;CMake variable  &lt;code class=&quot;highlighter-rouge&quot;&gt;CUDNN_LIBRARY&lt;/code&gt; indicates where to find the &lt;code class=&quot;highlighter-rouge&quot;&gt;libcudnn.so&lt;/code&gt; for your cuDNN&lt;/li&gt;
+  &lt;li&gt;CMake variable  &lt;code class=&quot;highlighter-rouge&quot;&gt;CMAKE_PREFIX_PATH&lt;/code&gt; tells CMake to look for packages in your conda environment
+before looking in system install locations (like &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;CMake variable  &lt;code class=&quot;highlighter-rouge&quot;&gt;CMAKE_INSTALL_PREFIX&lt;/code&gt; indicates where to install Caffe2 binaries such as
+&lt;code class=&quot;highlighter-rouge&quot;&gt;libcaffe2.dylib&lt;/code&gt; after Caffe2 has been successfully built, the default is
+&lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local&lt;/code&gt; which will require administrator privilege&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Let’s find out how many cores your machine has&lt;/p&gt;
@@ -60,7 +223,9 @@ My downloaded file was a shell script called &lt;code class=&quot;highlighter-ro
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /proc/cpuinfo | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;processor | wc &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;#=&amp;gt; n&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Let’s &lt;code class=&quot;highlighter-rouge&quot;&gt;make&lt;/code&gt; the package efficiently by maximising the number of jobs for it. General rule of thumb is to use 1 + n number of jobs where n is the output from the previous command. i.e. number of cores. Mine was 24 so I run the following&lt;/p&gt;
+&lt;p&gt;Let’s &lt;code class=&quot;highlighter-rouge&quot;&gt;make&lt;/code&gt; the package efficiently by maximising the number of jobs for it.
+General rule of thumb is to use 1 + n number of jobs where n is the output from
+the previous command. i.e. number of cores. Mine was 24 so I run the following&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;make &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; 25&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
@@ -68,13 +233,50 @@ My downloaded file was a shell script called &lt;code class=&quot;highlighter-ro
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;make install&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;You’d think we’re done, but not quite! For some reason python will not know where to look for the caffe2 python modules. I’m not sure why is this and if you do know how to fix it in the installation process, please let me know! My fix is to point the &lt;code class=&quot;highlighter-rouge&quot;&gt;$PYTHONPATH&lt;/code&gt; environment variable to our caffe2 build folder. To do this, append the following line to your &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.bashrc&lt;/code&gt; using your favorite text editor&lt;/p&gt;
+&lt;p&gt;You’d think we’re done, but not quite! For some reason python will not know
+where to look for the caffe2 python modules. I’m not sure why is this and if you
+do know how to fix it in the installation process, please let me know! We have
+to point the &lt;code class=&quot;highlighter-rouge&quot;&gt;$PYTHONPATH&lt;/code&gt; environment variable to our caffe2 build folder&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PYTHONPATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/caffe2/build&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PYTHONPATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/caffe2/build:&lt;span class=&quot;nv&quot;&gt;$PYTHONPATH&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Reload the shell&lt;/p&gt;
+&lt;p&gt;However it will be tedious to type that everytime we activate our environment.
+You may append that line to &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;.bashrc&lt;/code&gt; but some variables
+such as &lt;code class=&quot;highlighter-rouge&quot;&gt;$PYTHONPATH&lt;/code&gt; are potentially used in many environments and it could
+lead to python import errors when the paths contain different modules sharing
+the same name. For instance, both caffe and caffe2 contain a module named
+‘caffe’.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; ~/.bashrc&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;The solution to overcome this is to write a script to save our environment
+variables within our environemnt so that they get loaded automatically every
+time we activate our environment and get unset automatically when we deactivate
+our environment. I shall highlight the
+&lt;a href=&quot;https://conda.io/docs/user-guide/tasks/manage-environments.html#macos-and-linux&quot;&gt;guide&lt;/a&gt;
+stated in the official Anaconda documentation.&lt;/p&gt;
+
+&lt;p&gt;Let’s enter our environment directory and do the following&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/anaconda2/envs/caffe2
+mkdir &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; ./etc/conda/activate.d
+mkdir &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; ./etc/conda/deactivate.d
+touch ./etc/conda/activate.d/env_vars.sh
+touch ./etc/conda/deactivate.d/env_vars.sh&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Edit &lt;code class=&quot;highlighter-rouge&quot;&gt;./etc/conda/activate.d/env_vars.sh&lt;/code&gt; as follows:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PYTHONPATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/caffe2/build:&lt;span class=&quot;nv&quot;&gt;$PYTHONPATH&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Edit &lt;code class=&quot;highlighter-rouge&quot;&gt;./etc/conda/deactivate.d/env_vars.sh&lt;/code&gt; as follows:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;unset &lt;/span&gt;PYTHONPATH&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now let’s reload the current environment to reflect the variables&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;activate caffe2&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;We are now ready to test if caffe2 has installed correctly&lt;/p&gt;
 
@@ -86,4 +288,133 @@ python &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&
 &lt;span class=&quot;c&quot;&gt;# To check if Caffe2 GPU build was successful&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# This must print a number &amp;gt; 0 in order to use Detectron&lt;/span&gt;
 python2 &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'from caffe2.python import workspace; print(workspace.NumCudaDevices())'&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#=&amp;gt; n&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Jin Zhe</name></author><summary type="html">It is often the case in research labs that you do not get access to admin priviledges and so installation of AI tools can be nerve-racking. The following guide shows you how to install install Caffe2 with CUDA under the Anaconda 2 virtual environment without needing to use sudo. This guide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUs with CUDA support. As caffe2 is best supported on Python 2 at the time of this writing, this installation guide is written for Python 2.7.</summary></entry></feed>
+&lt;span class=&quot;c&quot;&gt;#=&amp;gt; 1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Jin Zhe</name></author><summary type="html">The following guide shows you how to install install Caffe2 with CUDA under the Anaconda 2 virtual environment without needing to use sudo. This guide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUs with CUDA support. i.e it assumes CUDA is already installed by a system admin. As caffe2 is best supported on Python 2 at the time of this writing, this installation guide is written for Python 2.7.</summary></entry><entry><title type="html">Getting up to speed with Anaconda</title><link href="http://localhost:4000/anaconda/conda/getting-up-to-speed-with-anaconda/" rel="alternate" type="text/html" title="Getting up to speed with Anaconda" /><published>2018-02-18T16:10:00+08:00</published><updated>2018-02-18T16:10:00+08:00</updated><id>http://localhost:4000/anaconda/conda/getting-up-to-speed-with-anaconda</id><content type="html" xml:base="http://localhost:4000/anaconda/conda/getting-up-to-speed-with-anaconda/">&lt;p&gt;&lt;a href=&quot;https://www.anaconda.com/&quot;&gt;Anaconda&lt;/a&gt; is a freemium open-source software for Python and R and it
+is widely used in scientific computing. It provides a virtual environment
+manager and it also comes with its own package management ecosystem conda. Why
+does this matter you ask? Be it in academic or industrial research labs, it is
+often the case that you are not granted admin access to GPU servers. Since you
+won’t have the ability to do &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo apt-get&lt;/code&gt;, the installation of AI tools can be
+quite nerve-racking.&lt;/p&gt;
+
+&lt;p&gt;Anaconda’s virtualization is much more &lt;em&gt;encompassing&lt;/em&gt; than say Python’s
+virtualenv. For instance you can install &lt;a href=&quot;https://cmake.org/&quot;&gt;CMake&lt;/a&gt; in an Anaconda
+environment and start building tools from source. It goes without saying that
+you no longer have much reasons to use Python’s virtualenv once you’re on
+Anaconda.&lt;/p&gt;
+
+&lt;p&gt;I shall walk you through installing Anaconda and get you up to speed with the
+most common and frequently used commands. Since &lt;em&gt;most&lt;/em&gt; scientific packages out
+in the wild offers the best support and stability for Python 2.7, I shall assume
+that version of Python in this guide.&lt;/p&gt;
+
+&lt;h1 id=&quot;installation&quot;&gt;Installation&lt;/h1&gt;
+&lt;p&gt;Let’s install &lt;strong&gt;Anaconda 2&lt;/strong&gt; via the download page [here][download-anaconda].
+The “2” simply means it’s for Python 2 so don’t download Anaconda 3 that is
+meant for Python 3!&lt;/p&gt;
+
+&lt;p&gt;My downloaded file was a shell script called &lt;code class=&quot;highlighter-rouge&quot;&gt;Anaconda2-5.0.1-Linux-x86_64.sh&lt;/code&gt;.
+Let’s run it&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;bash Anaconda-latest-Linux-x86_64.sh&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Be sure to run a first update right after installation&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda update conda&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We are done!&lt;/p&gt;
+
+&lt;h1 id=&quot;quick-start&quot;&gt;Quick Start&lt;/h1&gt;
+&lt;p&gt;Let’s start by creating a virtual environment and installing CMake in it!&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# conda create --name &amp;lt;environment-name&amp;gt; &amp;lt;python-packages&amp;gt;&lt;/span&gt;
+conda create &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; magical_schoolbus &lt;span class=&quot;nv&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2.7 anaconda&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-n&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;--name&lt;/code&gt; flag indicates the name for the environemt we wish to create&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;python=2.7&lt;/code&gt; indicates our Python version for this environment&lt;/li&gt;
+  &lt;li&gt;The trailing &lt;code class=&quot;highlighter-rouge&quot;&gt;anaconda&lt;/code&gt; in the end indicates that we wish to initialize our
+environment with the ‘anaconda’ meta-package. This is entirely optional!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Once the new environemnt is prepared, let’s clean up the installation cache&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda clean &lt;span class=&quot;nt&quot;&gt;--all&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We can see a list of all the environments we have created via&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda info &lt;span class=&quot;nt&quot;&gt;--envs&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Since we have only created one environemnt, we should only see
+&lt;code class=&quot;highlighter-rouge&quot;&gt;magical_schoolbus&lt;/code&gt;. We are now ready to hop onboard!&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;activate magical_schoolbus&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Let’s take a look at which are the programmes currently installed in our
+environment&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda list&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;It appears that &lt;code class=&quot;highlighter-rouge&quot;&gt;CMake&lt;/code&gt; isn’t in the list. Let’s check if it’s available for
+download. To search for packages to install, you may either search
+&lt;a href=&quot;https://www.anaconda.com/&quot;&gt;conda cloud&lt;/a&gt; on your browser or via the command line like so&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda search cmake&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Horray! CMake is available! We may proceed to install it in our current virtual
+environment&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# conda install --channel &amp;lt;channel-name&amp;gt; --name &amp;lt;environment-name&amp;gt; &amp;lt;package-name&amp;gt;&lt;/span&gt;
+conda install cmake &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;-y&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;--yes&lt;/code&gt; flag simply automates the ‘yes’ approval from you to install
+the packages&lt;/li&gt;
+  &lt;li&gt;If you wish to install in another virtual environment, simply use the &lt;code class=&quot;highlighter-rouge&quot;&gt;-n&lt;/code&gt;,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;--name&lt;/code&gt;  flag&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-c&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;--channel&lt;/code&gt; indicates additional channel to  search  for  packages if
+you do not wish to install from default packages&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To uninstall a package, simply do&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda uninstall some_package&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Finally when our work is complete, we may leave the virtual world like so&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;deactivate&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;To destroy an environment, input command&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda remove &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; myenv &lt;span class=&quot;nt&quot;&gt;--all&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;OR via its alias&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda env remove &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; myenv&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;To rename an environment, simply clone the current environment into another
+with the desired name and thereafter removing the old environment. Note that
+this is a potentially time and space consuming operation&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;deactivate &lt;span class=&quot;c&quot;&gt;# be sure to exit virtual environment first!&lt;/span&gt;
+conda create &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; new_name &lt;span class=&quot;nt&quot;&gt;--clone&lt;/span&gt; old_name
+conda remove &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; old_name &lt;span class=&quot;nt&quot;&gt;--all&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;That’s all folks! Be sure to check out the official &lt;a href=&quot;https://conda.io/docs/&quot;&gt;docs&lt;/a&gt; for the
+latest and complete documentation.&lt;/p&gt;
+
+&lt;h1 id=&quot;note&quot;&gt;NOTE&lt;/h1&gt;
+&lt;p&gt;After installation, Anaconda will automatically add the following to your
+&lt;code class=&quot;highlighter-rouge&quot;&gt;~/.bashrc&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# added by Anaconda2 installer&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/anaconda2/bin:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;While this may work well on a local machine, it’s not ideal if Anaconda was
+installed on a remote server we &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; into. This is because &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.bashrc&lt;/code&gt; is
+only automatically executed for interactive non-login shells and not for login
+shells. In light of this, &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.bash_profile&lt;/code&gt; is a much better candidate to store
+this environment variable export command.&lt;/p&gt;
+
+&lt;p&gt;TL;DR, if you’re running on &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt;, I’d suggest you cut
+and past that bit of export code from &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.bashrc&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.bash_profile&lt;/code&gt;. After
+you’re done, be sure to run &lt;code class=&quot;highlighter-rouge&quot;&gt;source ~/.bash_profile&lt;/code&gt;&lt;/p&gt;</content><author><name>Jin Zhe</name></author><summary type="html">Anaconda is a freemium open-source software for Python and R and it is widely used in scientific computing. It provides a virtual environment manager and it also comes with its own package management ecosystem conda. Why does this matter you ask? Be it in academic or industrial research labs, it is often the case that you are not granted admin access to GPU servers. Since you won’t have the ability to do sudo apt-get, the installation of AI tools can be quite nerve-racking.</summary></entry></feed>

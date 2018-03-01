@@ -112,7 +112,7 @@ However it will be tedious to type that everytime we activate our environment.
 You may append that line to `.bash_profile` or `.bashrc` but some variables
 such as `$PYTHONPATH` are potentially used in many environments and it could
 lead to python import errors when the paths contain different modules sharing
-the same name. For instance, both caffe and caffe 2 contain a module named
+the same name. For instance, both caffe and caffe2 contain a module named
 'caffe'.
 
 The solution to overcome this is to write a script to save our environment
@@ -159,6 +159,6 @@ python -c 'import caffe; caffe.set_mode_gpu()' 2>/dev/null && echo "Success" || 
 {% endhighlight %}
 
 [caffe]: http://caffe.berkeleyvision.org
-[anaconda-guide]: {% post_url 2018-02-19-getting-up-to-speed-with-anaconda %}
+[anaconda-guide]: {% post_url 2018-02-18-getting-up-to-speed-with-anaconda %}
 [download-cuDNN]: https://developer.nvidia.com/cudnn
 [cmake-flags]: https://github.com/BVLC/caffe/pull/1667
