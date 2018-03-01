@@ -51,11 +51,11 @@ virtual environment via
 {% highlight bash %}
 source activate caffe
 {% endhighlight %}
-
+me
 Now let's install the necessary dependencies in our current caffe environment:
 {% highlight bash %}
 conda install lmdb openblas glog gflags hdf5 protobuf leveldb boost cmake -y
-conda install -c menpo opencv3 -y
+conda install opencv -y
 {% endhighlight %}
 
 Let's clone the caffe's repo into our home directory.
@@ -124,7 +124,7 @@ stated in the official Anaconda documentation.
 
 Let's enter our environment directory and do the following
 {% highlight bash %}
-cd ~/anaconda2/envs/caffe
+cd ~/anaconda2/envs/caffeme
 mkdir -p ./etc/conda/activate.d
 mkdir -p ./etc/conda/deactivate.d
 touch ./etc/conda/activate.d/env_vars.sh
