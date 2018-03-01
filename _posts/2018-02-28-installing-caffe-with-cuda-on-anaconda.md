@@ -51,11 +51,10 @@ virtual environment via
 {% highlight bash %}
 source activate caffe
 {% endhighlight %}
-me
+
 Now let's install the necessary dependencies in our current caffe environment:
 {% highlight bash %}
-conda install lmdb openblas glog gflags hdf5 protobuf leveldb boost cmake -y
-conda install opencv -y
+conda install lmdb openblas glog gflags hdf5 protobuf leveldb boost opencv cmake -y
 {% endhighlight %}
 
 Let's clone the caffe's repo into our home directory.
