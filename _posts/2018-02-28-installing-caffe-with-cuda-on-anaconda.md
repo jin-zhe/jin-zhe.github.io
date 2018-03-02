@@ -144,5 +144,5 @@ python -c 'import caffe; caffe.set_mode_gpu()' 2>/dev/null && echo "Success" || 
 
 [caffe]: http://caffe.berkeleyvision.org
 [anaconda-guide]: {% post_url 2018-02-18-getting-up-to-speed-with-anaconda %}
-[cudnn-guide]: {% post_url 2018-02-17-getting-cudnn.md %}
+[cudnn-guide]: {% post_url 2018-02-17-getting-cudnn %}
 [cmake-flags]: https://github.com/BVLC/caffe/pull/1667

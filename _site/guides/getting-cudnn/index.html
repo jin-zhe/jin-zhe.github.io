@@ -1,0 +1,572 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.10.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Getting cuDNN - JIN ZHE’s blog</title>
+<meta name="description" content="This may be a too short to justify a stand-alone post but since many of myguides requires this bit of instruction, I felt it was necessary to abstract itout separately.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="JIN ZHE's blog">
+<meta property="og:title" content="Getting cuDNN">
+<meta property="og:url" content="http://localhost:4000/guides/getting-cudnn/">
+
+
+  <meta property="og:description" content="This may be a too short to justify a stand-alone post but since many of myguides requires this bit of instruction, I felt it was necessary to abstract itout separately.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2018-02-18T16:10:00+08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/guides/getting-cudnn/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "JIN ZHE",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="JIN ZHE's blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="http://localhost:4000/">JIN ZHE's blog</a>
+        <ul class="visible-links">
+          
+        </ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="http://localhost:4000/assets/images/bio-photo.png" alt="Jin Zhe" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Jin Zhe</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        I code.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Singapore</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/https://github.com/jin-zhe" itemprop="sameAs">
+            <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Getting cuDNN">
+    <meta itemprop="description" content="This may be a too short to justify a stand-alone post but since many of myguides requires this bit of instruction, I felt it was necessary to abstract itout separately.">
+    <meta itemprop="datePublished" content="February 18, 2018">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Getting cuDNN
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>This may be a too short to justify a stand-alone post but since many of my
+guides requires this bit of instruction, I felt it was necessary to abstract it
+out separately.</p>
+
+<p>In this guide I will show you how to get the right version of cuDNN and where to
+place it. Unless stated otherwise, we will be using this configuration for all
+of my guides.</p>
+
+<p>The stadard path for cuDNN installation is <code class="highlighter-rouge">/usr/local/cuda</code>. However, we will
+be <em>installing</em> cuDNN in our <code class="highlighter-rouge">$HOME</code> directory. The reason for this is two-fold:</p>
+<ol>
+  <li>You may not have admin privileges to install cuDNN in the conventional manner</li>
+  <li>Existing research project repositories sometimes work only on specific
+releases of cuDNN so this method allows you to switch between different versions
+easily along with a virtualization manager such as <a href="https://anaconda.org/">Anaconda</a>.</li>
+</ol>
+
+<h1 id="assumptions">Assumptions</h1>
+<ul>
+  <li>Ubuntu OS</li>
+  <li>NVIDIA GPU with CUDA support</li>
+  <li>CUDA (<em>installed by system admin</em>)</li>
+</ul>
+
+<h1 id="guide">Guide</h1>
+<p>Find out your CUDA version by running the following command</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cat</span> /usr/local/cuda/version.txt
+<span class="c">#=&gt; CUDA Version 8.0.61</span></code></pre></figure>
+
+<p>Download the NVIDIA cuDNN <a href="https://developer.nvidia.com/cudnn">here</a> corresponding to your CUDA
+version. You’ll be requried to sign up for a free developer account if you have
+not already done so. Be sure to download via the link that reads something like
+<code class="highlighter-rouge">cuDNN v7.0.5 Library for Linux</code>. Do not download the <code class="highlighter-rouge">.deb</code> version as you’ll
+need admin privilege to install that. The file I downloaded was named
+<code class="highlighter-rouge">cudnn-8.0-linux-x64-v7.tgz</code> and we are going to extract its contents into the
+home directory</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># cd &lt;your_download_directory&gt;</span>
+<span class="nb">tar</span> <span class="nt">-zxvf</span> cudnn-8.0-linux-x64-v7.tgz <span class="nt">-C</span> ~/</code></pre></figure>
+
+<p>This should create a <code class="highlighter-rouge">~/cuda</code> directory. Note the directory is called ‘cuda’
+instead of ‘cudnn’. If you are installing a separate release of cuDNN, simply
+unpack it into a separate directory of your naming e.g. <code class="highlighter-rouge">~/cudnn_v4</code>.</p>
+
+<p>That’s it! We are done!</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/tags/#cuda" class="page__taxonomy-item" rel="tag">CUDA</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/tags/#cudnn" class="page__taxonomy-item" rel="tag">cuDNN</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/tags/#nvidia" class="page__taxonomy-item" rel="tag">NVIDIA</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/categories/#guides" class="page__taxonomy-item" rel="tag">Guides</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-02-18T16:10:00+08:00">February 18, 2018</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Getting+cuDNN%20http%3A%2F%2Flocalhost%3A4000%2Fguides%2Fgetting-cudnn%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fguides%2Fgetting-cudnn%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2Fguides%2Fgetting-cudnn%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fguides%2Fgetting-cudnn%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="http://localhost:4000/guides/getting-up-to-speed-with-anaconda/" class="pagination--pager" title="Getting up to speed with Anaconda
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/guides/installing-caffe-with-cuda-on-anaconda/" rel="permalink">Installing Caffe with CUDA on Anaconda
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">The following guide shows you how to install install Caffe with CUDA
+under the Anaconda 2 virtual environment.
+
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/guides/installing-caffe2-with-cuda-on-anaconda/" rel="permalink">Installing Caffe2 with CUDA on Anaconda
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">The following guide shows you how to install install Caffe2 with CUDA
+under the Anaconda 2 virtual environment without needing to use sudo. This
+guide is mea...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/guides/getting-up-to-speed-with-anaconda/" rel="permalink">Getting up to speed with Anaconda
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Anaconda is a freemium open-source software for Python and R and it
+is widely used in scientific computing. It provides a virtual environment
+manager and it ...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/guides/getting-cudnn/" rel="permalink">Getting cuDNN
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">This may be a too short to justify a stand-alone post but since many of my
+guides requires this bit of instruction, I felt it was necessary to abstract it
+ou...</p>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+</div>
+
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/jin-zhe"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 JIN ZHE. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="http://localhost:4000/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>

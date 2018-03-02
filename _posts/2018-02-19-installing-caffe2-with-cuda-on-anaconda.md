@@ -157,4 +157,4 @@ python2 -c 'from caffe2.python import workspace; print(workspace.NumCudaDevices(
 
 [caffe2]: https://github.com/caffe2/caffe2
 [anaconda-guide]: {% post_url 2018-02-18-getting-up-to-speed-with-anaconda %}
-[cudnn-guide]: {% post_url 2018-02-17-getting-cudnn.md %}
+[cudnn-guide]: {% post_url 2018-02-17-getting-cudnn %}

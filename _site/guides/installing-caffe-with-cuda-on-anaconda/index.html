@@ -18,7 +18,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="JIN ZHE's blog">
 <meta property="og:title" content="Installing Caffe with CUDA on Anaconda">
-<meta property="og:url" content="http://localhost:4000/caffe/cuda/cudnn/installing-caffe-with-cuda-on-anaconda/">
+<meta property="og:url" content="http://localhost:4000/guides/installing-caffe-with-cuda-on-anaconda/">
 
 
   <meta property="og:description" content="The following guide shows you how to install install Caffe with CUDAunder the Anaconda 2 virtual environment.">
@@ -40,7 +40,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/caffe/cuda/cudnn/installing-caffe-with-cuda-on-anaconda/">
+<link rel="canonical" href="http://localhost:4000/guides/installing-caffe-with-cuda-on-anaconda/">
 
 
 
@@ -276,7 +276,7 @@ under the Anaconda 2 virtual environment.</p>
 <ul>
   <li>Ubuntu OS</li>
   <li>NVIDIA GPU with CUDA support</li>
-  <li>Anaconda 2 (see installation instructions <a href="/anaconda/conda/getting-up-to-speed-with-anaconda/">here</a>)</li>
+  <li>Anaconda 2 (see installation instructions <a href="/guides/getting-up-to-speed-with-anaconda/">here</a>)</li>
   <li>CUDA (<em>installed by system admin</em>)</li>
 </ul>
 
@@ -286,28 +286,13 @@ under the Anaconda 2 virtual environment.</p>
   <li>Ubuntu 16.04</li>
   <li>Python 2.7</li>
   <li>CUDA 8</li>
+  <li>cuDNN v7.1</li>
   <li>Anaconda 2</li>
   <li>OpenCV3</li>
 </ul>
 
 <h1 id="guide">Guide</h1>
-<p>Find out your CUDA version by running the following command</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cat</span> /usr/local/cuda/version.txt
-<span class="c">#=&gt; CUDA Version 8.0.61</span></code></pre></figure>
-
-<p>Download the NVIDIA cuDNN <a href="https://developer.nvidia.com/cudnn">here</a> corresponding to your CUDA
-version. You’ll be requried to sign up for a free developer account if you have
-not already done so. Be sure to download via the link that reads something like
-<code class="highlighter-rouge">cuDNN v7.0.5 Library for Linux</code>. Do not download the <code class="highlighter-rouge">.deb</code> version as you’ll
-need admin privilege to install that. The file I downloaded was named
-<code class="highlighter-rouge">cudnn-8.0-linux-x64-v7.tgz</code> and we are going to extract its contents into the
-home directory</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># cd your_download_directory</span>
-<span class="nb">tar</span> <span class="nt">-zxvf</span> cudnn-8.0-linux-x64-v7.tgz <span class="nt">-C</span> ~/</code></pre></figure>
-
-<p>This should create a <code class="highlighter-rouge">~/cuda</code> directory.</p>
+<p>First, get cuDNN by following this <a href="/guides/getting-cudnn/">cuDNN Guide</a>.</p>
 
 <p>Let’s create a virtual Anaconda environment called “caffe”.</p>
 
@@ -320,8 +305,7 @@ virtual environment via</p>
 
 <p>Now let’s install the necessary dependencies in our current caffe environment:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda install lmdb openblas glog gflags hdf5 protobuf leveldb boost cmake <span class="nt">-y</span>
-conda install <span class="nt">-c</span> menpo opencv3 <span class="nt">-y</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda install lmdb openblas glog gflags hdf5 protobuf leveldb boost opencv cmake <span class="nt">-y</span></code></pre></figure>
 
 <p>Let’s clone the caffe’s repo into our home directory.</p>
 
@@ -380,7 +364,7 @@ the same name. For instance, both caffe and caffe2 contain a module named
 <p>The solution to overcome this is to write a script to save our environment
 variables within our environemnt so that they get loaded automatically every
 time we activate our environment and get unset automatically when we deactivate
-our environment. I shall highlight the
+our environment. The following steps are an adaptation of this
 <a href="https://conda.io/docs/user-guide/tasks/manage-environments.html#macos-and-linux">guide</a>
 stated in the official Anaconda documentation.</p>
 
@@ -422,6 +406,37 @@ python <span class="nt">-c</span> <span class="s1">'import caffe; caffe.set_mode
       <footer class="page__meta">
         
         
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/tags/#anaconda" class="page__taxonomy-item" rel="tag">anaconda</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/tags/#caffe" class="page__taxonomy-item" rel="tag">caffe</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/tags/#cuda" class="page__taxonomy-item" rel="tag">CUDA</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/tags/#cudnn" class="page__taxonomy-item" rel="tag">cuDNN</a>
+    
+    </span>
+  </p>
+
+
 
 
   
@@ -437,15 +452,7 @@ python <span class="nt">-c</span> <span class="s1">'import caffe; caffe.set_mode
     
       
       
-      <a href="http://localhost:4000/categories/#caffe" class="page__taxonomy-item" rel="tag">caffe</a><span class="sep">, </span>
-    
-      
-      
-      <a href="http://localhost:4000/categories/#cuda" class="page__taxonomy-item" rel="tag">CUDA</a><span class="sep">, </span>
-    
-      
-      
-      <a href="http://localhost:4000/categories/#cudnn" class="page__taxonomy-item" rel="tag">cuDNN</a>
+      <a href="http://localhost:4000/categories/#guides" class="page__taxonomy-item" rel="tag">Guides</a>
     
     </span>
   </p>
@@ -459,20 +466,20 @@ python <span class="nt">-c</span> <span class="s1">'import caffe; caffe.set_mode
       <section class="page__share">
   
 
-  <a href="https://twitter.com/intent/tweet?text=Installing+Caffe+with+CUDA+on+Anaconda%20http%3A%2F%2Flocalhost%3A4000%2Fcaffe%2Fcuda%2Fcudnn%2Finstalling-caffe-with-cuda-on-anaconda%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Installing+Caffe+with+CUDA+on+Anaconda%20http%3A%2F%2Flocalhost%3A4000%2Fguides%2Finstalling-caffe-with-cuda-on-anaconda%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fcaffe%2Fcuda%2Fcudnn%2Finstalling-caffe-with-cuda-on-anaconda%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fguides%2Finstalling-caffe-with-cuda-on-anaconda%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2Fcaffe%2Fcuda%2Fcudnn%2Finstalling-caffe-with-cuda-on-anaconda%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2Fguides%2Finstalling-caffe-with-cuda-on-anaconda%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fcaffe%2Fcuda%2Fcudnn%2Finstalling-caffe-with-cuda-on-anaconda%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fguides%2Finstalling-caffe-with-cuda-on-anaconda%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda/" class="pagination--pager" title="Installing Caffe2 with CUDA on Anaconda
+      <a href="http://localhost:4000/guides/installing-caffe2-with-cuda-on-anaconda/" class="pagination--pager" title="Installing Caffe2 with CUDA on Anaconda
 ">Previous</a>
     
     
@@ -500,7 +507,7 @@ python <span class="nt">-c</span> <span class="s1">'import caffe; caffe.set_mode
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda/" rel="permalink">Installing Caffe2 with CUDA on Anaconda
+        <a href="http://localhost:4000/guides/installing-caffe2-with-cuda-on-anaconda/" rel="permalink">Installing Caffe2 with CUDA on Anaconda
 </a>
       
     </h2>
@@ -528,7 +535,7 @@ guide is mea...</p>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="http://localhost:4000/anaconda/conda/getting-up-to-speed-with-anaconda/" rel="permalink">Getting up to speed with Anaconda
+        <a href="http://localhost:4000/guides/getting-up-to-speed-with-anaconda/" rel="permalink">Getting up to speed with Anaconda
 </a>
       
     </h2>
@@ -544,6 +551,34 @@ guide is mea...</p>
     <p class="archive__item-excerpt" itemprop="description">Anaconda is a freemium open-source software for Python and R and it
 is widely used in scientific computing. It provides a virtual environment
 manager and it ...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/guides/getting-cudnn/" rel="permalink">Getting cuDNN
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">This may be a too short to justify a stand-alone post but since many of my
+guides requires this bit of instruction, I felt it was necessary to abstract it
+ou...</p>
   </article>
 </div>
         
@@ -583,7 +618,7 @@ manager and it ...</p>
 
     
   <script src="http://localhost:4000/assets/js/main.min.js"></script>
-  <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
 
 

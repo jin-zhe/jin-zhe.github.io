@@ -95,4 +95,4 @@ bash test/run_test.sh
 
 [pytorch: http://pytorch.org/
 [anaconda-guide]: {% post_url 2018-02-18-getting-up-to-speed-with-anaconda %}
-[cudnn-guide]: {% post_url 2018-02-17-getting-cudnn.md %}
+[cudnn-guide]: {% post_url 2018-02-17-getting-cudnn %}

@@ -18,7 +18,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="JIN ZHE's blog">
 <meta property="og:title" content="Getting up to speed with Anaconda">
-<meta property="og:url" content="http://localhost:4000/anaconda/conda/getting-up-to-speed-with-anaconda/">
+<meta property="og:url" content="http://localhost:4000/guides/getting-up-to-speed-with-anaconda/">
 
 
   <meta property="og:description" content="Anaconda is a freemium open-source software for Python and R and itis widely used in scientific computing. It provides a virtual environmentmanager and it also comes with its own package management ecosystem conda. Whydoes this matter you ask? Be it in academic or industrial research labs, it isoften the case that you are not granted admin access to GPU servers. Since youwon’t have the ability to do sudo apt-get, the installation of AI tools can bequite nerve-racking.">
@@ -40,7 +40,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/anaconda/conda/getting-up-to-speed-with-anaconda/">
+<link rel="canonical" href="http://localhost:4000/guides/getting-up-to-speed-with-anaconda/">
 
 
 
@@ -296,7 +296,7 @@ meant for Python 3!</p>
 <p>My downloaded file was a shell script called <code class="highlighter-rouge">Anaconda2-5.0.1-Linux-x86_64.sh</code>.
 Let’s run it</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">bash Anaconda-latest-Linux-x86_64.sh</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">bash Anaconda2-5.0.1-Linux-x86_64.sh</code></pre></figure>
 
 <p>Be sure to run a first update right after installation</p>
 
@@ -305,7 +305,7 @@ Let’s run it</p>
 <p>We are done!</p>
 
 <h1 id="quick-start">Quick Start</h1>
-<p>Let’s start by creating a virtual environment and installing CMake in it!</p>
+<p>Let’s start by creating a virtual environment!</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># conda create --name &lt;environment-name&gt; &lt;python-packages&gt;</span>
 conda create <span class="nt">-n</span> magical_schoolbus <span class="nv">python</span><span class="o">=</span>2.7 anaconda</code></pre></figure>
@@ -317,7 +317,7 @@ conda create <span class="nt">-n</span> magical_schoolbus <span class="nv">pytho
 environment with the ‘anaconda’ meta-package. This is entirely optional!</li>
 </ul>
 
-<p>Once the new environemnt is prepared, let’s clean up the installation cache</p>
+<p>Once the new environment is prepared, let’s clean up the installation cache</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda clean <span class="nt">--all</span></code></pre></figure>
 
@@ -407,6 +407,29 @@ you’re done, be sure to run <code class="highlighter-rouge">source ~/.bash_pro
       <footer class="page__meta">
         
         
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/tags/#anaconda" class="page__taxonomy-item" rel="tag">anaconda</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/tags/#conda" class="page__taxonomy-item" rel="tag">conda</a>
+    
+    </span>
+  </p>
+
+
 
 
   
@@ -422,11 +445,7 @@ you’re done, be sure to run <code class="highlighter-rouge">source ~/.bash_pro
     
       
       
-      <a href="http://localhost:4000/categories/#anaconda" class="page__taxonomy-item" rel="tag">anaconda</a><span class="sep">, </span>
-    
-      
-      
-      <a href="http://localhost:4000/categories/#conda" class="page__taxonomy-item" rel="tag">conda</a>
+      <a href="http://localhost:4000/categories/#guides" class="page__taxonomy-item" rel="tag">Guides</a>
     
     </span>
   </p>
@@ -440,23 +459,24 @@ you’re done, be sure to run <code class="highlighter-rouge">source ~/.bash_pro
       <section class="page__share">
   
 
-  <a href="https://twitter.com/intent/tweet?text=Getting+up+to+speed+with+Anaconda%20http%3A%2F%2Flocalhost%3A4000%2Fanaconda%2Fconda%2Fgetting-up-to-speed-with-anaconda%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Getting+up+to+speed+with+Anaconda%20http%3A%2F%2Flocalhost%3A4000%2Fguides%2Fgetting-up-to-speed-with-anaconda%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fanaconda%2Fconda%2Fgetting-up-to-speed-with-anaconda%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fguides%2Fgetting-up-to-speed-with-anaconda%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2Fanaconda%2Fconda%2Fgetting-up-to-speed-with-anaconda%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2Fguides%2Fgetting-up-to-speed-with-anaconda%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fanaconda%2Fconda%2Fgetting-up-to-speed-with-anaconda%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fguides%2Fgetting-up-to-speed-with-anaconda%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="#" class="pagination--pager disabled">Previous</a>
+      <a href="http://localhost:4000/guides/getting-cudnn/" class="pagination--pager" title="Getting cuDNN
+">Previous</a>
     
     
-      <a href="http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda/" class="pagination--pager" title="Installing Caffe2 with CUDA on Anaconda
+      <a href="http://localhost:4000/guides/installing-caffe2-with-cuda-on-anaconda/" class="pagination--pager" title="Installing Caffe2 with CUDA on Anaconda
 ">Next</a>
     
   </nav>
@@ -481,7 +501,7 @@ you’re done, be sure to run <code class="highlighter-rouge">source ~/.bash_pro
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="http://localhost:4000/caffe/cuda/cudnn/installing-caffe-with-cuda-on-anaconda/" rel="permalink">Installing Caffe with CUDA on Anaconda
+        <a href="http://localhost:4000/guides/installing-caffe-with-cuda-on-anaconda/" rel="permalink">Installing Caffe with CUDA on Anaconda
 </a>
       
     </h2>
@@ -491,7 +511,7 @@ you’re done, be sure to run <code class="highlighter-rouge">source ~/.bash_pro
 
 
 
-  4 minute read
+  3 minute read
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">The following guide shows you how to install install Caffe with CUDA
@@ -510,7 +530,7 @@ under the Anaconda 2 virtual environment.
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda/" rel="permalink">Installing Caffe2 with CUDA on Anaconda
+        <a href="http://localhost:4000/guides/installing-caffe2-with-cuda-on-anaconda/" rel="permalink">Installing Caffe2 with CUDA on Anaconda
 </a>
       
     </h2>
@@ -538,7 +558,7 @@ guide is mea...</p>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="http://localhost:4000/anaconda/conda/getting-up-to-speed-with-anaconda/" rel="permalink">Getting up to speed with Anaconda
+        <a href="http://localhost:4000/guides/getting-cudnn/" rel="permalink">Getting cuDNN
 </a>
       
     </h2>
@@ -548,17 +568,18 @@ guide is mea...</p>
 
 
 
-  3 minute read
+  1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">Anaconda is a freemium open-source software for Python and R and it
-is widely used in scientific computing. It provides a virtual environment
-manager and it ...</p>
+    <p class="archive__item-excerpt" itemprop="description">This may be a too short to justify a stand-alone post but since many of my
+guides requires this bit of instruction, I felt it was necessary to abstract it
+ou...</p>
   </article>
 </div>
         
       </div>
     </div>
+  
   
 </div>
 
@@ -592,7 +613,7 @@ manager and it ...</p>
 
     
   <script src="http://localhost:4000/assets/js/main.min.js"></script>
-  <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
 
 

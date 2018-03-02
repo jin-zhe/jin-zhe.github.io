@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-01T14:37:49+08:00</updated><id>http://localhost:4000/</id><title type="html">JIN ZHE’s blog</title><subtitle>Jin Zhe's nugets.</subtitle><author><name>Jin Zhe</name></author><entry><title type="html">Installing Caffe with CUDA on Anaconda</title><link href="http://localhost:4000/caffe/cuda/cudnn/installing-caffe-with-cuda-on-anaconda/" rel="alternate" type="text/html" title="Installing Caffe with CUDA on Anaconda" /><published>2018-02-28T16:10:00+08:00</published><updated>2018-02-28T16:10:00+08:00</updated><id>http://localhost:4000/caffe/cuda/cudnn/installing-caffe-with-cuda-on-anaconda</id><content type="html" xml:base="http://localhost:4000/caffe/cuda/cudnn/installing-caffe-with-cuda-on-anaconda/">&lt;p&gt;The following guide shows you how to install install &lt;a href=&quot;http://caffe.berkeleyvision.org&quot;&gt;Caffe&lt;/a&gt; with CUDA
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-02T12:12:03+08:00</updated><id>http://localhost:4000/</id><title type="html">JIN ZHE’s blog</title><subtitle>Jin Zhe's nugets.</subtitle><author><name>Jin Zhe</name></author><entry><title type="html">Installing Caffe with CUDA on Anaconda</title><link href="http://localhost:4000/guides/installing-caffe-with-cuda-on-anaconda/" rel="alternate" type="text/html" title="Installing Caffe with CUDA on Anaconda" /><published>2018-02-28T16:10:00+08:00</published><updated>2018-02-28T16:10:00+08:00</updated><id>http://localhost:4000/guides/installing-caffe-with-cuda-on-anaconda</id><content type="html" xml:base="http://localhost:4000/guides/installing-caffe-with-cuda-on-anaconda/">&lt;p&gt;The following guide shows you how to install install &lt;a href=&quot;http://caffe.berkeleyvision.org&quot;&gt;Caffe&lt;/a&gt; with CUDA
 under the Anaconda 2 virtual environment.&lt;/p&gt;
 
 &lt;h1 id=&quot;assumptions&quot;&gt;Assumptions&lt;/h1&gt;
 &lt;ul&gt;
   &lt;li&gt;Ubuntu OS&lt;/li&gt;
   &lt;li&gt;NVIDIA GPU with CUDA support&lt;/li&gt;
-  &lt;li&gt;Anaconda 2 (see installation instructions &lt;a href=&quot;/anaconda/conda/getting-up-to-speed-with-anaconda/&quot;&gt;here&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Anaconda 2 (see installation instructions &lt;a href=&quot;/guides/getting-up-to-speed-with-anaconda/&quot;&gt;here&lt;/a&gt;)&lt;/li&gt;
   &lt;li&gt;CUDA (&lt;em&gt;installed by system admin&lt;/em&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -15,28 +15,13 @@ under the Anaconda 2 virtual environment.&lt;/p&gt;
   &lt;li&gt;Ubuntu 16.04&lt;/li&gt;
   &lt;li&gt;Python 2.7&lt;/li&gt;
   &lt;li&gt;CUDA 8&lt;/li&gt;
+  &lt;li&gt;cuDNN v7.1&lt;/li&gt;
   &lt;li&gt;Anaconda 2&lt;/li&gt;
   &lt;li&gt;OpenCV3&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;guide&quot;&gt;Guide&lt;/h1&gt;
-&lt;p&gt;Find out your CUDA version by running the following command&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /usr/local/cuda/version.txt
-&lt;span class=&quot;c&quot;&gt;#=&amp;gt; CUDA Version 8.0.61&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Download the NVIDIA cuDNN &lt;a href=&quot;https://developer.nvidia.com/cudnn&quot;&gt;here&lt;/a&gt; corresponding to your CUDA
-version. You’ll be requried to sign up for a free developer account if you have
-not already done so. Be sure to download via the link that reads something like
-&lt;code class=&quot;highlighter-rouge&quot;&gt;cuDNN v7.0.5 Library for Linux&lt;/code&gt;. Do not download the &lt;code class=&quot;highlighter-rouge&quot;&gt;.deb&lt;/code&gt; version as you’ll
-need admin privilege to install that. The file I downloaded was named
-&lt;code class=&quot;highlighter-rouge&quot;&gt;cudnn-8.0-linux-x64-v7.tgz&lt;/code&gt; and we are going to extract its contents into the
-home directory&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# cd your_download_directory&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-zxvf&lt;/span&gt; cudnn-8.0-linux-x64-v7.tgz &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; ~/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;This should create a &lt;code class=&quot;highlighter-rouge&quot;&gt;~/cuda&lt;/code&gt; directory.&lt;/p&gt;
+&lt;p&gt;First, get cuDNN by following this &lt;a href=&quot;/guides/getting-cudnn/&quot;&gt;cuDNN Guide&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Let’s create a virtual Anaconda environment called “caffe”.&lt;/p&gt;
 
@@ -49,8 +34,7 @@ virtual environment via&lt;/p&gt;
 
 &lt;p&gt;Now let’s install the necessary dependencies in our current caffe environment:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda install lmdb openblas glog gflags hdf5 protobuf leveldb boost cmake &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
-conda install &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; menpo opencv3 &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda install lmdb openblas glog gflags hdf5 protobuf leveldb boost opencv cmake &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Let’s clone the caffe’s repo into our home directory.&lt;/p&gt;
 
@@ -109,7 +93,7 @@ the same name. For instance, both caffe and caffe2 contain a module named
 &lt;p&gt;The solution to overcome this is to write a script to save our environment
 variables within our environemnt so that they get loaded automatically every
 time we activate our environment and get unset automatically when we deactivate
-our environment. I shall highlight the
+our environment. The following steps are an adaptation of this
 &lt;a href=&quot;https://conda.io/docs/user-guide/tasks/manage-environments.html#macos-and-linux&quot;&gt;guide&lt;/a&gt;
 stated in the official Anaconda documentation.&lt;/p&gt;
 
@@ -142,7 +126,7 @@ touch ./etc/conda/deactivate.d/env_vars.sh&lt;/code&gt;&lt;/pre&gt;&lt;/figure&g
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~
 &lt;span class=&quot;c&quot;&gt;# To check if Caffe build was successful&lt;/span&gt;
 python &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'import caffe; caffe.set_mode_gpu()'&lt;/span&gt; 2&amp;gt;/dev/null &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Success&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Failure&quot;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#=&amp;gt; Success&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Jin Zhe</name></author><summary type="html">The following guide shows you how to install install Caffe with CUDA under the Anaconda 2 virtual environment.</summary></entry><entry><title type="html">Installing Caffe2 with CUDA on Anaconda</title><link href="http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda/" rel="alternate" type="text/html" title="Installing Caffe2 with CUDA on Anaconda" /><published>2018-02-19T16:10:00+08:00</published><updated>2018-02-19T16:10:00+08:00</updated><id>http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda</id><content type="html" xml:base="http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda/">&lt;p&gt;The following guide shows you how to install install &lt;a href=&quot;https://github.com/caffe2/caffe2&quot;&gt;Caffe2&lt;/a&gt; with CUDA
+&lt;span class=&quot;c&quot;&gt;#=&amp;gt; Success&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Jin Zhe</name></author><category term="caffe" /><category term="CUDA" /><category term="cuDNN" /><category term="anaconda" /><summary type="html">The following guide shows you how to install install Caffe with CUDA under the Anaconda 2 virtual environment.</summary></entry><entry><title type="html">Installing Caffe2 with CUDA on Anaconda</title><link href="http://localhost:4000/guides/installing-caffe2-with-cuda-on-anaconda/" rel="alternate" type="text/html" title="Installing Caffe2 with CUDA on Anaconda" /><published>2018-02-19T16:10:00+08:00</published><updated>2018-02-19T16:10:00+08:00</updated><id>http://localhost:4000/guides/installing-caffe2-with-cuda-on-anaconda</id><content type="html" xml:base="http://localhost:4000/guides/installing-caffe2-with-cuda-on-anaconda/">&lt;p&gt;The following guide shows you how to install install &lt;a href=&quot;https://github.com/caffe2/caffe2&quot;&gt;Caffe2&lt;/a&gt; with CUDA
 under the Anaconda 2 virtual environment without needing to use &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo&lt;/code&gt;. This
 guide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUs
 with CUDA support. i.e it assumes CUDA is already installed by a system admin.
@@ -153,28 +137,23 @@ installation guide is written for Python 2.7.&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Ubuntu OS&lt;/li&gt;
   &lt;li&gt;NVIDIA GPU&lt;/li&gt;
-  &lt;li&gt;Anaconda 2 (see installation instructions &lt;a href=&quot;/anaconda/conda/getting-up-to-speed-with-anaconda/&quot;&gt;here&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Anaconda 2 (see installation instructions &lt;a href=&quot;/guides/getting-up-to-speed-with-anaconda/&quot;&gt;here&lt;/a&gt;)&lt;/li&gt;
   &lt;li&gt;CUDA (&lt;em&gt;installed by system admin&lt;/em&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h1 id=&quot;specifications&quot;&gt;Specifications&lt;/h1&gt;
+&lt;p&gt;This guide is written for the following specs:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ubuntu 16.04&lt;/li&gt;
+  &lt;li&gt;Python 2.7&lt;/li&gt;
+  &lt;li&gt;CUDA 8&lt;/li&gt;
+  &lt;li&gt;cuDNN v7.1&lt;/li&gt;
+  &lt;li&gt;Anaconda 2&lt;/li&gt;
+  &lt;li&gt;OpenCV3&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h1 id=&quot;guide&quot;&gt;Guide&lt;/h1&gt;
-&lt;p&gt;Find out your CUDA version by running the following command&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /usr/local/cuda/version.txt
-&lt;span class=&quot;c&quot;&gt;#=&amp;gt; CUDA Version 8.0.61&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Download the NVIDIA cuDNN &lt;a href=&quot;https://developer.nvidia.com/cudnn&quot;&gt;here&lt;/a&gt; corresponding to your CUDA
-version. You’ll be requried to sign up for a free developer account if you have
-not already done so. Be sure to download via the link that reads something like
-&lt;code class=&quot;highlighter-rouge&quot;&gt;cuDNN v7.0.5 Library for Linux&lt;/code&gt;. Do not download the &lt;code class=&quot;highlighter-rouge&quot;&gt;.deb&lt;/code&gt; version as you’ll
-need admin privilege to install that. The file I downloaded was named
-&lt;code class=&quot;highlighter-rouge&quot;&gt;cudnn-8.0-linux-x64-v7.tgz&lt;/code&gt; and we are going to extract its contents into the
-home directory&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# cd your_download_directory&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-zxvf&lt;/span&gt; cudnn-8.0-linux-x64-v7.tgz &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; ~/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;This should create a &lt;code class=&quot;highlighter-rouge&quot;&gt;~/cuda&lt;/code&gt; directory.&lt;/p&gt;
+&lt;p&gt;First, get cuDNN by following this &lt;a href=&quot;/guides/getting-cudnn/&quot;&gt;cuDNN Guide&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Let’s create a virtual Anaconda environment called “caffe2”.&lt;/p&gt;
 
@@ -250,7 +229,7 @@ the same name. For instance, both caffe and caffe2 contain a module named
 &lt;p&gt;The solution to overcome this is to write a script to save our environment
 variables within our environemnt so that they get loaded automatically every
 time we activate our environment and get unset automatically when we deactivate
-our environment. I shall highlight the
+our environment. The following steps are an adaptation of this
 &lt;a href=&quot;https://conda.io/docs/user-guide/tasks/manage-environments.html#macos-and-linux&quot;&gt;guide&lt;/a&gt;
 stated in the official Anaconda documentation.&lt;/p&gt;
 
@@ -288,7 +267,7 @@ python &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&
 &lt;span class=&quot;c&quot;&gt;# To check if Caffe2 GPU build was successful&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# This must print a number &amp;gt; 0 in order to use Detectron&lt;/span&gt;
 python2 &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'from caffe2.python import workspace; print(workspace.NumCudaDevices())'&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#=&amp;gt; 1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Jin Zhe</name></author><summary type="html">The following guide shows you how to install install Caffe2 with CUDA under the Anaconda 2 virtual environment without needing to use sudo. This guide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUs with CUDA support. i.e it assumes CUDA is already installed by a system admin. As caffe2 is best supported on Python 2 at the time of this writing, this installation guide is written for Python 2.7.</summary></entry><entry><title type="html">Getting up to speed with Anaconda</title><link href="http://localhost:4000/anaconda/conda/getting-up-to-speed-with-anaconda/" rel="alternate" type="text/html" title="Getting up to speed with Anaconda" /><published>2018-02-18T16:10:00+08:00</published><updated>2018-02-18T16:10:00+08:00</updated><id>http://localhost:4000/anaconda/conda/getting-up-to-speed-with-anaconda</id><content type="html" xml:base="http://localhost:4000/anaconda/conda/getting-up-to-speed-with-anaconda/">&lt;p&gt;&lt;a href=&quot;https://www.anaconda.com/&quot;&gt;Anaconda&lt;/a&gt; is a freemium open-source software for Python and R and it
+&lt;span class=&quot;c&quot;&gt;#=&amp;gt; 1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Jin Zhe</name></author><category term="caffe2" /><category term="CUDA" /><category term="cuDNN" /><category term="anaconda" /><summary type="html">The following guide shows you how to install install Caffe2 with CUDA under the Anaconda 2 virtual environment without needing to use sudo. This guide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUs with CUDA support. i.e it assumes CUDA is already installed by a system admin. As caffe2 is best supported on Python 2 at the time of this writing, this installation guide is written for Python 2.7.</summary></entry><entry><title type="html">Getting up to speed with Anaconda</title><link href="http://localhost:4000/guides/getting-up-to-speed-with-anaconda/" rel="alternate" type="text/html" title="Getting up to speed with Anaconda" /><published>2018-02-18T16:10:00+08:00</published><updated>2018-02-18T16:10:00+08:00</updated><id>http://localhost:4000/guides/getting-up-to-speed-with-anaconda</id><content type="html" xml:base="http://localhost:4000/guides/getting-up-to-speed-with-anaconda/">&lt;p&gt;&lt;a href=&quot;https://www.anaconda.com/&quot;&gt;Anaconda&lt;/a&gt; is a freemium open-source software for Python and R and it
 is widely used in scientific computing. It provides a virtual environment
 manager and it also comes with its own package management ecosystem conda. Why
 does this matter you ask? Be it in academic or industrial research labs, it is
@@ -315,7 +294,7 @@ meant for Python 3!&lt;/p&gt;
 &lt;p&gt;My downloaded file was a shell script called &lt;code class=&quot;highlighter-rouge&quot;&gt;Anaconda2-5.0.1-Linux-x86_64.sh&lt;/code&gt;.
 Let’s run it&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;bash Anaconda-latest-Linux-x86_64.sh&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;bash Anaconda2-5.0.1-Linux-x86_64.sh&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Be sure to run a first update right after installation&lt;/p&gt;
 
@@ -324,7 +303,7 @@ Let’s run it&lt;/p&gt;
 &lt;p&gt;We are done!&lt;/p&gt;
 
 &lt;h1 id=&quot;quick-start&quot;&gt;Quick Start&lt;/h1&gt;
-&lt;p&gt;Let’s start by creating a virtual environment and installing CMake in it!&lt;/p&gt;
+&lt;p&gt;Let’s start by creating a virtual environment!&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# conda create --name &amp;lt;environment-name&amp;gt; &amp;lt;python-packages&amp;gt;&lt;/span&gt;
 conda create &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; magical_schoolbus &lt;span class=&quot;nv&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2.7 anaconda&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
@@ -336,7 +315,7 @@ conda create &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; magical_schoolbus 
 environment with the ‘anaconda’ meta-package. This is entirely optional!&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Once the new environemnt is prepared, let’s clean up the installation cache&lt;/p&gt;
+&lt;p&gt;Once the new environment is prepared, let’s clean up the installation cache&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda clean &lt;span class=&quot;nt&quot;&gt;--all&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
@@ -417,4 +396,49 @@ this environment variable export command.&lt;/p&gt;
 
 &lt;p&gt;TL;DR, if you’re running on &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt;, I’d suggest you cut
 and past that bit of export code from &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.bashrc&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.bash_profile&lt;/code&gt;. After
-you’re done, be sure to run &lt;code class=&quot;highlighter-rouge&quot;&gt;source ~/.bash_profile&lt;/code&gt;&lt;/p&gt;</content><author><name>Jin Zhe</name></author><summary type="html">Anaconda is a freemium open-source software for Python and R and it is widely used in scientific computing. It provides a virtual environment manager and it also comes with its own package management ecosystem conda. Why does this matter you ask? Be it in academic or industrial research labs, it is often the case that you are not granted admin access to GPU servers. Since you won’t have the ability to do sudo apt-get, the installation of AI tools can be quite nerve-racking.</summary></entry></feed>
+you’re done, be sure to run &lt;code class=&quot;highlighter-rouge&quot;&gt;source ~/.bash_profile&lt;/code&gt;&lt;/p&gt;</content><author><name>Jin Zhe</name></author><category term="anaconda" /><category term="conda" /><summary type="html">Anaconda is a freemium open-source software for Python and R and it is widely used in scientific computing. It provides a virtual environment manager and it also comes with its own package management ecosystem conda. Why does this matter you ask? Be it in academic or industrial research labs, it is often the case that you are not granted admin access to GPU servers. Since you won’t have the ability to do sudo apt-get, the installation of AI tools can be quite nerve-racking.</summary></entry><entry><title type="html">Getting cuDNN</title><link href="http://localhost:4000/guides/getting-cudnn/" rel="alternate" type="text/html" title="Getting cuDNN" /><published>2018-02-18T16:10:00+08:00</published><updated>2018-02-18T16:10:00+08:00</updated><id>http://localhost:4000/guides/getting-cudnn</id><content type="html" xml:base="http://localhost:4000/guides/getting-cudnn/">&lt;p&gt;This may be a too short to justify a stand-alone post but since many of my
+guides requires this bit of instruction, I felt it was necessary to abstract it
+out separately.&lt;/p&gt;
+
+&lt;p&gt;In this guide I will show you how to get the right version of cuDNN and where to
+place it. Unless stated otherwise, we will be using this configuration for all
+of my guides.&lt;/p&gt;
+
+&lt;p&gt;The stadard path for cuDNN installation is &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/cuda&lt;/code&gt;. However, we will
+be &lt;em&gt;installing&lt;/em&gt; cuDNN in our &lt;code class=&quot;highlighter-rouge&quot;&gt;$HOME&lt;/code&gt; directory. The reason for this is two-fold:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;You may not have admin privileges to install cuDNN in the conventional manner&lt;/li&gt;
+  &lt;li&gt;Existing research project repositories sometimes work only on specific
+releases of cuDNN so this method allows you to switch between different versions
+easily along with a virtualization manager such as &lt;a href=&quot;https://anaconda.org/&quot;&gt;Anaconda&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;assumptions&quot;&gt;Assumptions&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ubuntu OS&lt;/li&gt;
+  &lt;li&gt;NVIDIA GPU with CUDA support&lt;/li&gt;
+  &lt;li&gt;CUDA (&lt;em&gt;installed by system admin&lt;/em&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;guide&quot;&gt;Guide&lt;/h1&gt;
+&lt;p&gt;Find out your CUDA version by running the following command&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /usr/local/cuda/version.txt
+&lt;span class=&quot;c&quot;&gt;#=&amp;gt; CUDA Version 8.0.61&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Download the NVIDIA cuDNN &lt;a href=&quot;https://developer.nvidia.com/cudnn&quot;&gt;here&lt;/a&gt; corresponding to your CUDA
+version. You’ll be requried to sign up for a free developer account if you have
+not already done so. Be sure to download via the link that reads something like
+&lt;code class=&quot;highlighter-rouge&quot;&gt;cuDNN v7.0.5 Library for Linux&lt;/code&gt;. Do not download the &lt;code class=&quot;highlighter-rouge&quot;&gt;.deb&lt;/code&gt; version as you’ll
+need admin privilege to install that. The file I downloaded was named
+&lt;code class=&quot;highlighter-rouge&quot;&gt;cudnn-8.0-linux-x64-v7.tgz&lt;/code&gt; and we are going to extract its contents into the
+home directory&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# cd &amp;lt;your_download_directory&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-zxvf&lt;/span&gt; cudnn-8.0-linux-x64-v7.tgz &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; ~/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This should create a &lt;code class=&quot;highlighter-rouge&quot;&gt;~/cuda&lt;/code&gt; directory. Note the directory is called ‘cuda’
+instead of ‘cudnn’. If you are installing a separate release of cuDNN, simply
+unpack it into a separate directory of your naming e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;~/cudnn_v4&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;That’s it! We are done!&lt;/p&gt;</content><author><name>Jin Zhe</name></author><category term="cuDNN" /><category term="CUDA" /><category term="NVIDIA" /><summary type="html">This may be a too short to justify a stand-alone post but since many of my guides requires this bit of instruction, I felt it was necessary to abstract it out separately.</summary></entry></feed>

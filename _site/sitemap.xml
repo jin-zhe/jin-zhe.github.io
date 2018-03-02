@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://localhost:4000/anaconda/conda/getting-up-to-speed-with-anaconda/</loc>
+<loc>http://localhost:4000/guides/getting-cudnn/</loc>
 <lastmod>2018-02-18T16:10:00+08:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/caffe2/cuda/cudnn/installing-caffe2-with-cuda-on-anaconda/</loc>
+<loc>http://localhost:4000/guides/getting-up-to-speed-with-anaconda/</loc>
+<lastmod>2018-02-18T16:10:00+08:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/guides/installing-caffe2-with-cuda-on-anaconda/</loc>
 <lastmod>2018-02-19T16:10:00+08:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/caffe/cuda/cudnn/installing-caffe-with-cuda-on-anaconda/</loc>
+<loc>http://localhost:4000/guides/installing-caffe-with-cuda-on-anaconda/</loc>
 <lastmod>2018-02-28T16:10:00+08:00</lastmod>
 </url>
 <url>
