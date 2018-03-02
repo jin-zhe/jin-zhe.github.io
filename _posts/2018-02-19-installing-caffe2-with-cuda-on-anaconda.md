@@ -2,7 +2,8 @@
 layout: single
 title:  "Installing Caffe2 with CUDA on Anaconda"
 date:   2018-02-19 16:10:00 +0800
-categories: caffe2 CUDA cuDNN
+categories: Guides
+tags: caffe2 CUDA cuDNN anaconda
 ---
 
 The following guide shows you how to install install [Caffe2][caffe2] with CUDA
@@ -18,25 +19,17 @@ installation guide is written for Python 2.7.
 * Anaconda 2 (see installation instructions [here][anaconda-guide])
 * CUDA (*installed by system admin*)
 
-# Guide
-Find out your CUDA version by running the following command
-{% highlight bash %}
-cat /usr/local/cuda/version.txt
-#=> CUDA Version 8.0.61
-{% endhighlight %}
+# Specifications
+This guide is written for the following specs:
+* Ubuntu 16.04
+* Python 2.7
+* CUDA 8
+* cuDNN v7.1
+* Anaconda 2
+* OpenCV3
 
-Download the NVIDIA cuDNN [here][download-cuDNN] corresponding to your CUDA
-version. You'll be requried to sign up for a free developer account if you have
-not already done so. Be sure to download via the link that reads something like
-`cuDNN v7.0.5 Library for Linux`. Do not download the `.deb` version as you'll
-need admin privilege to install that. The file I downloaded was named
-`cudnn-8.0-linux-x64-v7.tgz` and we are going to extract its contents into the
-home directory
-{% highlight bash %}
-# cd your_download_directory
-tar -zxvf cudnn-8.0-linux-x64-v7.tgz -C ~/
-{% endhighlight %}
-This should create a `~/cuda` directory.
+# Guide
+First, get cuDNN by following this [cuDNN Guide][cudnn-guide].
 
 Let's create a virtual Anaconda environment called "caffe2".
 {% highlight bash %}
@@ -164,4 +157,4 @@ python2 -c 'from caffe2.python import workspace; print(workspace.NumCudaDevices(
 
 [caffe2]: https://github.com/caffe2/caffe2
 [anaconda-guide]: {% post_url 2018-02-18-getting-up-to-speed-with-anaconda %}
-[download-cuDNN]: https://developer.nvidia.com/cudnn
+[cudnn-guide]: {% post_url 2018-02-17-getting-cudnn.md %}

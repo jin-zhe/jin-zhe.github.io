@@ -2,7 +2,8 @@
 layout: single
 title:  "Getting up to speed with Anaconda"
 date:   2018-02-18 16:10:00 +0800
-categories: anaconda conda
+categories: Guides
+tags: anaconda conda
 ---
 [Anaconda][anaconda] is a freemium open-source software for Python and R and it
 is widely used in scientific computing. It provides a virtual environment
@@ -31,7 +32,7 @@ meant for Python 3!
 My downloaded file was a shell script called `Anaconda2-5.0.1-Linux-x86_64.sh`.
 Let's run it
 {% highlight bash %}
-bash Anaconda-latest-Linux-x86_64.sh
+bash Anaconda2-5.0.1-Linux-x86_64.sh
 {% endhighlight %}
 
 Be sure to run a first update right after installation
@@ -42,7 +43,7 @@ conda update conda
 We are done!
 
 # Quick Start
-Let's start by creating a virtual environment and installing CMake in it!
+Let's start by creating a virtual environment!
 {% highlight bash %}
 # conda create --name <environment-name> <python-packages>
 conda create -n magical_schoolbus python=2.7 anaconda
@@ -52,7 +53,7 @@ conda create -n magical_schoolbus python=2.7 anaconda
 * The trailing `anaconda` in the end indicates that we wish to initialize our
 environment with the 'anaconda' meta-package. This is entirely optional!
 
-Once the new environemnt is prepared, let's clean up the installation cache
+Once the new environment is prepared, let's clean up the installation cache
 {% highlight bash %}
 conda clean --all
 {% endhighlight %}
