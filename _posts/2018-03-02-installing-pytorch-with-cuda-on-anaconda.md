@@ -93,6 +93,6 @@ We are now ready to test if pytorch has been installed correctly with CUDA
 bash test/run_test.sh
 {% endhighlight %}
 
-[pytorch: http://pytorch.org/
+[pytorch]: http://pytorch.org/
 [anaconda-guide]: {% post_url 2018-02-18-getting-up-to-speed-with-anaconda %}
 [cudnn-guide]: {% post_url 2018-02-17-getting-cudnn %}
