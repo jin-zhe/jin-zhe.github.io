@@ -32,7 +32,7 @@ conda create -n pytorch python=2.7 anaconda
 {% endhighlight %}
 
 For our non-standard installation of cuDNN, we need to tell pytorch where to
-look for `libcudart.` via the environment variable `$LD_LIBRARY_PATH`. Let's
+look for `libcudart` via the environment variable `$LD_LIBRARY_PATH`. Let's
 tell Anaconda to set that every time we activate 'pytorch' and unset that
 everytime we deactivate the environment
 
