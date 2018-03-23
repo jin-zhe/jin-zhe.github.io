@@ -145,4 +145,5 @@ you're done, be sure to run `source ~/.bash_profile`
 
 [anaconda]: https://www.anaconda.com/
 [cmake]: https://cmake.org/
+[download-anaconda]: https://www.anaconda.com/download/#linux
 [docs]: https://conda.io/docs/
