@@ -80,7 +80,7 @@ export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY
 {% endhighlight %}
 You may append them to `~/.bashrc` if you're running on your local machine,
 `~/.bash_profile` if you're accessing a remote machine via ssh, or better
-yet [save the environment varialbes][manage-environments] under a Conda environment!
+yet [save the environment variables][manage-environments] under a Conda environment!
 
 We are done for CUDA!
 
