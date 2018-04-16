@@ -71,11 +71,11 @@ export CMAKE_PREFIX_PATH="$(dirname $(which conda))/../" # [anaconda root direct
 # Install basic dependencies
 conda install git numpy pyyaml mkl setuptools cmake cffi typing
 
-# Add LAPACK support for the GPU
-conda install -c pytorch magma-cuda80 # or magma-cuda90 if CUDA 9
+# Install optional dependencies: add LAPACK support for the GPU
+conda install -c pytorch magma-cuda90 # or magma-cuda80 if CUDA 8
 {% endhighlight %}
 
-Let's clone the caffe's repo into our home directory:
+Let's clone the pytorch repo into our home directory:
 {% highlight bash %}
 cd ~ && git clone --recursive git@github.com:pytorch/pytorch.git && cd pytorch
 {% endhighlight %}
@@ -83,12 +83,22 @@ cd ~ && git clone --recursive git@github.com:pytorch/pytorch.git && cd pytorch
 We are now ready to install pytorch via the very convenient installer in the
 repo:
 {% highlight bash %}
-export CUDNN_LIB_DIR=$HOME/cuda/lib64/
-export CUDNN_INCLUDE_DIR=$HOME/cuda/include/
+export CUDNN_LIB_DIR=$CUDA_HOME/lib64/
+export CUDNN_INCLUDE=$CUDA_HOME/include/
 python setup.py install
 {% endhighlight %}
 
 We are now ready to test if pytorch has been installed correctly with CUDA
+For a quick test:
+{% highlight bash %}
+# Check if Pytorch was installed
+python -c 'import torch' 2>/dev/null && echo "Success" || echo "Failure"
+
+# To check if Caffe2 GPU build was successful
+python -c 'import torch; print(torch.cuda.is_available())'
+{% endhighlight %}
+
+For a comprehensive test
 {% highlight bash %}
 bash test/run_test.sh
 {% endhighlight %}
