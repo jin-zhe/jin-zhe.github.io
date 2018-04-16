@@ -90,8 +90,10 @@ python setup.py install
 {% endhighlight %}
 
 We are now ready to test if pytorch has been installed correctly with CUDA
-For a quick test:
+
 {% highlight bash %}
+## For a quick test:
+cd $HOME
 # Check if Pytorch was installed
 python -c 'import torch' 2>/dev/null && echo "Success" || echo "Failure"
 #=> Success
@@ -99,10 +101,9 @@ python -c 'import torch' 2>/dev/null && echo "Success" || echo "Failure"
 # To check if Caffe2 GPU build was successful
 python -c 'import torch; print(torch.cuda.is_available())'
 #=> True
-{% endhighlight %}
 
-For a comprehensive test
-{% highlight bash %}
+## For a comprehensive test:
+cd $HOME/pytorch
 bash test/run_test.sh
 {% endhighlight %}
 
