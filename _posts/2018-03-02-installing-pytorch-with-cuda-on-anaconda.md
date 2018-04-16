@@ -28,7 +28,8 @@ First, get cuDNN by following this [cuDNN Guide][cudnn-guide].
 
 Let's create a virtual Anaconda environment called "pytorch":
 {% highlight bash %}
-conda create -n pytorch python=2.7 anaconda
+conda update mkl # Update mkl package in root env to prevent this error later on: https://github.com/pytorch/pytorch/issues/6068#issuecomment-377226963
+conda create -n pytorch python=3.6
 {% endhighlight %}
 
 For our non-standard installation of cuDNN, we need to tell pytorch where to
@@ -48,8 +49,7 @@ touch ./etc/conda/deactivate.d/env_vars.sh
 Edit `./etc/conda/activate.d/env_vars.sh` as follows:
 {% highlight bash %}
 #!/bin/sh
-
-export LD_LIBRARY_PATH=$HOME/cuda/lib64
+export LD_LIBRARY_PATH=$CUDA_HOME/lib64
 {% endhighlight %}
 
 Edit `./etc/conda/deactivate.d/env_vars.sh` as follows:
@@ -83,8 +83,9 @@ cd ~ && git clone --recursive git@github.com:pytorch/pytorch.git && cd pytorch
 We are now ready to install pytorch via the very convenient installer in the
 repo:
 {% highlight bash %}
-export CUDNN_LIB_DIR=$CUDA_HOME/lib64/
-export CUDNN_INCLUDE=$CUDA_HOME/include/
+CUDNN_LIB_DIR=$CUDA_HOME/lib64/ \
+CUDNN_INCLUDE=$CUDA_HOME/include/ \
+MAX_JOBS=25 \ # Please use: "cat /proc/cpuinfo | grep processor | wc -l" + 1
 python setup.py install
 {% endhighlight %}
 
@@ -93,9 +94,11 @@ For a quick test:
 {% highlight bash %}
 # Check if Pytorch was installed
 python -c 'import torch' 2>/dev/null && echo "Success" || echo "Failure"
+#=> Success
 
 # To check if Caffe2 GPU build was successful
 python -c 'import torch; print(torch.cuda.is_available())'
+#=> True
 {% endhighlight %}
 
 For a comprehensive test
