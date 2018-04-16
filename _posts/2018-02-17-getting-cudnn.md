@@ -58,8 +58,13 @@ as the example.
 Let's make the versioned cuda install directory under `$HOME` following
 NVIDIA's convention of displaying the version in the dirname:
 {% highlight bash %}
-cd ~
+cd $HOME
 mkdir cuda-9.0
+{% endhighlight %}
+
+Let's save this under the `CUDA_HOME` environment variable:
+{% highlight bash %}
+export CUDA_HOME=$HOME/cuda-9.0
 {% endhighlight %}
 
 I downloaded the runfile named `cuda_9.0.176_384.81_linux-run` into my
@@ -70,13 +75,13 @@ cd ~/Downloads
 sh cuda_9.0.176_384.81_linux-run --silent --toolkit --toolkitpath=~/cuda-9.0
 {% endhighlight %}
 
-Once the installation is done, we have to add the following environment
-variables:
+Once the installation is done, we have to ensure the following environment
+variables are assigned correctly:
 {% highlight bash %}
-export CUDA_HOME=$HOME/cuda-9.0
+export CUDA_HOME=$CUDA_HOME # included for sake of completeness
 export PATH=$CUDA_HOME/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-# For 32-bit OS: export LD_LIBRARY_PATH=/usr/local/cuda-9.1/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export LD_LIBRARY_PATH=$CUDA_HOME/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+# For 32-bit OS: export LD_LIBRARY_PATH=$CUDA_HOME/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 {% endhighlight %}
 You may append them to `~/.bashrc` if you're running on your local machine,
 `~/.bash_profile` if you're accessing a remote machine via ssh, or better
