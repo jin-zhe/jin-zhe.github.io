@@ -107,6 +107,15 @@ cd $HOME/pytorch
 bash test/run_test.sh
 {% endhighlight %}
 
+If you are also installing [torchvision][torchvision]:
+{% highlight bash %}
+cd $HOME/pytorch
+git clone https://github.com/pytorch/vision
+cd vision
+python setup.py install
+{% endhighlight %}
+
 [pytorch]: http://pytorch.org/
 [anaconda-guide]: {% post_url 2018-02-18-getting-up-to-speed-with-anaconda %}
 [cudnn-guide]: {% post_url 2018-02-17-getting-cudnn %}
+[torchvision]: https://github.com/pytorch/vision
