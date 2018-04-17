@@ -55,7 +55,6 @@ export LD_LIBRARY_PATH=$CUDA_HOME/lib64
 Edit `./etc/conda/deactivate.d/env_vars.sh` as follows:
 {% highlight bash %}
 #!/bin/sh
-
 unset LD_LIBRARY_PATH
 {% endhighlight %}
 
