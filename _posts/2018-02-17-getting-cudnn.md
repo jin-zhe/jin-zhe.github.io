@@ -72,7 +72,7 @@ I downloaded the runfile named `cuda_9.0.176_384.81_linux-run` into my
 versioned install directory:
 {% highlight bash %}
 cd ~/Downloads
-sh cuda_9.0.176_384.81_linux-run --silent --toolkit --toolkitpath=~/cuda-9.0
+sh cuda_9.0.176_384.81_linux-run --silent --toolkit --toolkitpath=$CUDA_HOME
 {% endhighlight %}
 
 Once the installation is done, we have to ensure the following environment
