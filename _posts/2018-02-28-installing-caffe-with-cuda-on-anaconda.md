@@ -54,7 +54,7 @@ mkdir build && cd build
 
 We shall now build the package using CMake with the following flags
 {% highlight bash %}
-cmake -DBLAS=open -DCUDNN_INCLUDE=~/cuda/include/ -DCUDNN_LIBRARY=~/cuda/lib64/libcudnn.so -DCMAKE_PREFIX_PATH=~/anaconda2/envs/caffe -DCMAKE_INSTALL_PREFIX=~/anaconda2/envs/caffe ..
+ENV_PATH=$HOME/anaconda2/envs/caffe cmake -DBLAS=open -DCUDNN_INCLUDE=$CUDA_HOME/include/ -DCUDNN_LIBRARY=$CUDA_HOME/lib64/libcudnn.so -DCMAKE_PREFIX_PATH=$ENV_PATH -DCMAKE_INSTALL_PREFIX=$ENV_PATH ..
 {% endhighlight %}
 * CMake variable `BLAS=open` indicates that we would like use OpenBLAS instead of the default
 which is ATLAS
@@ -108,7 +108,7 @@ stated in the official Anaconda documentation.
 
 Let's enter our environment directory and do the following
 {% highlight bash %}
-cd ~/anaconda2/envs/caffe
+cd $ENV_PATH
 mkdir -p ./etc/conda/activate.d
 mkdir -p ./etc/conda/deactivate.d
 touch ./etc/conda/activate.d/env_vars.sh
