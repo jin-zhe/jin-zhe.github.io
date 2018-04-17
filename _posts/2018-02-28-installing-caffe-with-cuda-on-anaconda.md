@@ -101,7 +101,7 @@ the same name. For instance, both caffe and caffe2 contain a module named
 'caffe'.
 
 The solution to overcome this is to write a script to save our environment
-variables within our environemnt so that they get loaded automatically every
+variables within our environment so that they get loaded automatically every
 time we activate our environment and get unset automatically when we deactivate
 our environment. The following steps are an adaptation of this
 [guide](https://conda.io/docs/user-guide/tasks/manage-environments.html#macos-and-linux)
