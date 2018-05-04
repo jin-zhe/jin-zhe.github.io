@@ -71,7 +71,7 @@ export CMAKE_PREFIX_PATH="$(dirname $(which conda))/../" # [anaconda root direct
 conda install git numpy pyyaml mkl setuptools cmake cffi typing
 
 # Install optional dependencies: add LAPACK support for the GPU
-conda install -c pytorch magma-cuda90 # or magma-cuda80 if CUDA 8
+conda install -c pytorch magma-cudaxx # where xx reflects your cuda version, for e.g. 91 corresponds to cuda 9.1
 {% endhighlight %}
 
 Let's clone the pytorch repo into our home directory:
@@ -84,8 +84,9 @@ repo:
 {% highlight bash %}
 CUDNN_LIB_DIR=$CUDA_HOME/lib64/ \
 CUDNN_INCLUDE=$CUDA_HOME/include/ \
-MAX_JOBS=25 \ # Please use: "cat /proc/cpuinfo | grep processor | wc -l" + 1
+MAX_JOBS=25 \ 
 python setup.py install
+# Note: To determine assignment for MAX_JOBS, please use "cat /proc/cpuinfo | grep processor | wc -l" + 1
 {% endhighlight %}
 
 We are now ready to test if pytorch has been installed correctly with CUDA
