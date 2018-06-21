@@ -47,8 +47,7 @@ source activate caffe2
 
 Now let's install the necessary dependencies in our current caffe2 environment:
 {% highlight bash %}
-conda install -y future gflags glog lmdb mkl mkl-include numpy opencv protobuf
-snappy six cmake
+conda install -y future gflags glog lmdb mkl mkl-include numpy opencv protobuf snappy six cmake
 {% endhighlight %}
 
 Let's clone the caffe2's repo into our home directory.
