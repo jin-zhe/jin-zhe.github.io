@@ -52,12 +52,13 @@ conda install -y future gflags glog lmdb mkl mkl-include numpy opencv protobuf s
 
 Let's clone the caffe2's repo and its submodules into our home directory.
 {% highlight bash %}
-cd ~ && git clone --recursive https://github.com/pytorch/pytorch/ && cd pytorch/caffe2
+cd ~
+git clone --recursive https://github.com/pytorch/pytorch.git && cd pytorch
 git submodule update --init --recursive
 {% endhighlight %}
 
-We shall avoid polluting the caffe2 source tree by building within a build
-folder
+We shall avoid polluting the PyTorch source tree by building within a build
+folder (yes within PyTorch root directory, not within Caffe2 directory!)
 {% highlight bash %}
 mkdir build && cd build
 {% endhighlight %}
