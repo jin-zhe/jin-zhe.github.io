@@ -47,13 +47,12 @@ source activate caffe2
 
 Now let's install the necessary dependencies in our current caffe2 environment:
 {% highlight bash %}
-conda install -y future gflags glog lmdb mkl mkl-include numpy opencv protobuf snappy six cmake boost
-conda install -y -c omnia eigen3 
+conda install -y future gflags glog lmdb mkl mkl-include numpy opencv protobuf snappy six cmake
 {% endhighlight %}
 
 Let's clone the caffe2's repo and its submodules into our home directory.
 {% highlight bash %}
-cd ~ && git clone --recursive https://github.com/caffe2/caffe2.git && cd caffe2
+cd ~ && git clone --recursive https://github.com/pytorch/pytorch/ && cd pytorch/caffe2
 git submodule update --init --recursive
 {% endhighlight %}
 
