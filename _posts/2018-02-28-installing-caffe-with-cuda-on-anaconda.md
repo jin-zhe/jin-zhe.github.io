@@ -55,7 +55,7 @@ mkdir build && cd build
 We shall now build the package using CMake with the following flags
 {% highlight bash %}
 export ENV_PATH=$HOME/anaconda2/envs/caffe
-cmake -DBLAS=open -DCUDNN_INCLUDE=$CUDA_HOME/include/ -DCUDNN_LIBRARY=$CUDA_HOME/lib64/libcudnn.so -DCMAKE_PREFIX_PATH=$ENV_PATH -DCMAKE_INSTALL_PREFIX=$ENV_PATH ..
+cmake -DBLAS=open -DCUDNN_INCLUDE=$CUDA_HOME/include/ -DCUDNN_LIBRARY=$CUDA_HOME/lib64/libcudnn.so -DCMAKE_PREFIX_PATH=$ENV_PATH -DCMAKE_INSTALL_PREFIX=$ENV_PATH -DCMAKE_CXX_FLAGS="-std=c++11" ..
 {% endhighlight %}
 * CMake variable `BLAS=open` indicates that we would like use OpenBLAS instead of the default
 which is ATLAS
@@ -65,6 +65,7 @@ cuDNN
 * CMake variable  `CMAKE_PREFIX_PATH` tells CMake to look for packages in your conda environment
 before looking in system install locations (like `/usr/local`)
 * CMake variable  `CMAKE_INSTALL_PREFIX` indicates where to install Caffe binaries
+* CMake variable  `DCMAKE_CXX_FLAGS` indicates which C++ compiler version to use
 * Also see the [list of the available make flags][cmake-flags] and their default
 values
 
