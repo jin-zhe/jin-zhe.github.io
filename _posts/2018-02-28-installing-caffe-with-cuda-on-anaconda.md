@@ -39,7 +39,7 @@ source activate caffe
 
 Now let's install the necessary dependencies in our current caffe environment:
 {% highlight bash %}
-conda install lmdb openblas glog gflags hdf5 protobuf leveldb boost opencv cmake -y
+conda install lmdb openblas glog gflags hdf5 protobuf leveldb boost opencv cmake numpy=1.15 -y
 {% endhighlight %}
 
 Let's clone the caffe's repo into our home directory.
