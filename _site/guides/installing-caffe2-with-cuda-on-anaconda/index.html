@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Installing Caffe2 with CUDA on Anaconda - JIN ZHE’s blog</title>
-<meta name="description" content="The following guide shows you how to install install Caffe2 with CUDAunder the Anaconda 2 virtual environment without needing to use sudo. Thisguide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUswith CUDA support. i.e it assumes CUDA is already installed by a system admin.As caffe2 is best supported on Python 2 at the time of this writing, thisinstallation guide is written for Python 2.7.">
+<meta name="description" content="">
 
 
 
@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://localhost:4000/guides/installing-caffe2-with-cuda-on-anaconda/">
 
 
-  <meta property="og:description" content="The following guide shows you how to install install Caffe2 with CUDAunder the Anaconda 2 virtual environment without needing to use sudo. Thisguide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUswith CUDA support. i.e it assumes CUDA is already installed by a system admin.As caffe2 is best supported on Python 2 at the time of this writing, thisinstallation guide is written for Python 2.7.">
+  <meta property="og:description" content="">
 
 
 
@@ -247,7 +247,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Installing Caffe2 with CUDA on Anaconda">
-    <meta itemprop="description" content="The following guide shows you how to install install Caffe2 with CUDAunder the Anaconda 2 virtual environment without needing to use sudo. Thisguide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUswith CUDA support. i.e it assumes CUDA is already installed by a system admin.As caffe2 is best supported on Python 2 at the time of this writing, thisinstallation guide is written for Python 2.7.">
+    <meta itemprop="description" content="">
     <meta itemprop="datePublished" content="February 19, 2018">
     
 
@@ -270,7 +270,8 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>The following guide shows you how to install install <a href="https://github.com/caffe2/caffe2">Caffe2</a> with CUDA
+        
+<p>The following guide shows you how to install install <a href="https://github.com/caffe2/caffe2">Caffe2</a> with CUDA
 under the Anaconda 2 virtual environment without needing to use <code class="highlighter-rouge">sudo</code>. This
 guide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUs
 with CUDA support. i.e it assumes CUDA is already installed by a system admin.
@@ -309,27 +310,29 @@ accordingly for the rest of this guide</em></p>
 <p>After it prepares the environment and installs the defaults, activate the
 virtual environment via</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">source </span>activate caffe2
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda activate caffe2
 <span class="c"># to deactivate: source deactivate caffe2</span></code></pre></figure>
 
 <p>Now let’s install the necessary dependencies in our current caffe2 environment:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda install <span class="nt">-y</span> future gflags glog lmdb mkl mkl-include numpy opencv protobuf snappy six cmake</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda install future gflags glog lmdb mkl mkl-include numpy opencv protobuf snappy six cmake <span class="nt">-y</span></code></pre></figure>
 
-<p>Let’s clone the caffe2’s repo and its submodules into our home directory.</p>
+<p>Let’s clone caffe2’s repo and its submodules into our home directory.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> ~
-git clone <span class="nt">--recursive</span> https://github.com/pytorch/pytorch.git <span class="o">&amp;&amp;</span> <span class="nb">cd </span>pytorch
+git clone <span class="nt">--recursive</span> https://github.com/pytorch/pytorch.git
+<span class="nb">cd </span>pytorch
 git submodule update <span class="nt">--init</span> <span class="nt">--recursive</span></code></pre></figure>
 
-<p>We shall avoid polluting the PyTorch source tree by building within a build
-folder (yes within PyTorch root directory, not within Caffe2 directory!)</p>
+<p>We shall avoid polluting the pytorch source tree by building
+within a build folder</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build
+<span class="nb">pwd</span> <span class="c">#=&gt; ~/pytorch/build</span></code></pre></figure>
 
 <p>We shall now build the package using CMake with the following flags</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">cmake <span class="nt">-DCUDNN_INCLUDE_DIR</span><span class="o">=</span>~/cuda/include <span class="nt">-DCUDNN_LIBRARY</span><span class="o">=</span>~/cuda/lib64/libcudnn.so <span class="nt">-DCMAKE_PREFIX_PATH</span><span class="o">=</span>~/anaconda2/envs/caffe2 <span class="nt">-DCMAKE_INSTALL_PREFIX</span><span class="o">=</span>~/anaconda2/envs/caffe2 ..</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">cmake <span class="nt">-DCUDNN_INCLUDE_DIR</span><span class="o">=</span>~/cuda/include <span class="nt">-DCUDNN_LIBRARY</span><span class="o">=</span>~/cuda/lib64/libcudnn.so <span class="nt">-DCMAKE_PREFIX_PATH</span><span class="o">=</span><span class="nv">$CONDA_PREFIX</span> <span class="nt">-DCMAKE_INSTALL_PREFIX</span><span class="o">=</span><span class="nv">$CONDA_PREFIX</span> ..</code></pre></figure>
 
 <ul>
   <li>CMake variable  <code class="highlighter-rouge">CUDNN_INCLUDE_DIR</code> indicates where to find the <code class="highlighter-rouge">include</code> directory for your
@@ -340,6 +343,7 @@ before looking in system install locations (like <code class="highlighter-rouge"
   <li>CMake variable  <code class="highlighter-rouge">CMAKE_INSTALL_PREFIX</code> indicates where to install Caffe2 binaries such as
 <code class="highlighter-rouge">libcaffe2.dylib</code> after Caffe2 has been successfully built, the default is
 <code class="highlighter-rouge">/usr/local</code> which will require administrator privilege</li>
+  <li>CMake variable  <code class="highlighter-rouge">CPU</code> indicates whether or not to use CPU=only installation</li>
 </ul>
 
 <p>Let’s find out how many cores your machine has</p>
@@ -357,12 +361,10 @@ the previous command. i.e. number of cores. Mine was 24 so I run the following</
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">make install</code></pre></figure>
 
-<p>You’d think we’re done, but not quite! For some reason python will not know
-where to look for the caffe2 python modules. I’m not sure why is this and if you
-do know how to fix it in the installation process, please let me know! We have
-to point the <code class="highlighter-rouge">$PYTHONPATH</code> environment variable to our caffe2 build folder</p>
+<p>You’d think we’re done, but not quite! We have to point the <code class="highlighter-rouge">$PYTHONPATH</code>
+environment variable to our caffe folder like so</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">export </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="nv">$HOME</span>/caffe2/build:<span class="nv">$PYTHONPATH</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">export </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="nv">$HOME</span>/pytorch/build:<span class="nv">$PYTHONPATH</span></code></pre></figure>
 
 <p>However it will be tedious to type that everytime we activate our environment.
 You may append that line to <code class="highlighter-rouge">.bash_profile</code> or <code class="highlighter-rouge">.bashrc</code> but some variables
@@ -390,7 +392,7 @@ touch ./etc/conda/deactivate.d/env_vars.sh</code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/sh</span>
 
-<span class="nb">export </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="nv">$HOME</span>/caffe2/build:<span class="nv">$PYTHONPATH</span></code></pre></figure>
+<span class="nb">export </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="nv">$HOME</span>/pytorch/build:<span class="nv">$PYTHONPATH</span></code></pre></figure>
 
 <p>Edit <code class="highlighter-rouge">./etc/conda/deactivate.d/env_vars.sh</code> as follows:</p>
 
@@ -561,12 +563,10 @@ under the Anaconda 2 virtual environment.
 
 
 
-  3 minute read
+  1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">The following guide shows you how to install install Caffe with CUDA
-under the Anaconda 2 virtual environment.
-
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>

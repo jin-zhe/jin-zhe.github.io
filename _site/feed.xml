@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-03-07T15:13:39+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">JIN ZHE’s blog</title><subtitle>Jin Zhe's nugets.</subtitle><author><name>Jin Zhe</name></author><entry><title type="html">Installing pytorch with CUDA on Anaconda</title><link href="http://localhost:4000/guides/installing-pytorch-with-cuda-on-anaconda/" rel="alternate" type="text/html" title="Installing pytorch with CUDA on Anaconda" /><published>2018-03-02T16:10:00+08:00</published><updated>2018-03-02T16:10:00+08:00</updated><id>http://localhost:4000/guides/installing-pytorch-with-cuda-on-anaconda</id><content type="html" xml:base="http://localhost:4000/guides/installing-pytorch-with-cuda-on-anaconda/">&lt;p&gt;The following guide shows you how to install &lt;a href=&quot;http://pytorch.org/&quot;&gt;pytorch&lt;/a&gt; with CUDA
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-03-19T23:14:54+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">JIN ZHE’s blog</title><subtitle>Jin Zhe's nugets.</subtitle><author><name>Jin Zhe</name></author><entry><title type="html">Installing pytorch with CUDA on Anaconda</title><link href="http://localhost:4000/guides/installing-pytorch-with-cuda-on-anaconda/" rel="alternate" type="text/html" title="Installing pytorch with CUDA on Anaconda" /><published>2018-03-02T16:10:00+08:00</published><updated>2018-03-02T16:10:00+08:00</updated><id>http://localhost:4000/guides/installing-pytorch-with-cuda-on-anaconda</id><content type="html" xml:base="http://localhost:4000/guides/installing-pytorch-with-cuda-on-anaconda/">&lt;p&gt;The following guide shows you how to install &lt;a href=&quot;http://pytorch.org/&quot;&gt;pytorch&lt;/a&gt; with CUDA
 under the Anaconda 2 virtual environment.&lt;/p&gt;
 
 &lt;h1 id=&quot;assumptions&quot;&gt;Assumptions&lt;/h1&gt;
@@ -128,27 +128,36 @@ under the Anaconda 2 virtual environment.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda create &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; caffe &lt;span class=&quot;nv&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2.7 anaconda&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
+&lt;p&gt;&lt;em&gt;You many of course use a different environment name, just be sure to adjust
+accordingly for the rest of this guide&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;After it prepares the environment and installs the defaults, activate the
 virtual environment via&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;activate caffe&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda activate caffe
+&lt;span class=&quot;c&quot;&gt;# to deactivate: source deactivate caffe&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Now let’s install the necessary dependencies in our current caffe environment:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda install lmdb openblas glog gflags hdf5 protobuf leveldb boost opencv cmake &lt;span class=&quot;nv&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1.15 &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda install lmdb openblas glog gflags hdf5 protobuf leveldb boost opencv cmake &lt;span class=&quot;nv&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1.15 &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+conda install &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; conda-forge doxygen &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Let’s clone the caffe’s repo into our home directory.&lt;/p&gt;
+&lt;p&gt;Let’s clone caffe’s repo and its submodules into our home directory.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~ &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; git clone &lt;span class=&quot;nt&quot;&gt;--recursive&lt;/span&gt; https://github.com/BVLC/caffe &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;caffe&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~
+git clone &lt;span class=&quot;nt&quot;&gt;--recursive&lt;/span&gt; https://github.com/BVLC/caffe.git
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;caffe
+git submodule update &lt;span class=&quot;nt&quot;&gt;--init&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--recursive&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;We shall avoid polluting the caffe source tree by building within build a folder&lt;/p&gt;
+&lt;p&gt;We shall avoid polluting the caffe source tree by building
+within a build folder&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mkdir build &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;build&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mkdir build &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;build
+&lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#=&amp;gt; ~/caffe/build&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;We shall now build the package using CMake with the following flags&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ENV_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/anaconda2/envs/caffe
-cmake &lt;span class=&quot;nt&quot;&gt;-DBLAS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;open &lt;span class=&quot;nt&quot;&gt;-DCUDNN_INCLUDE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$CUDA_HOME&lt;/span&gt;/include/ &lt;span class=&quot;nt&quot;&gt;-DCUDNN_LIBRARY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$CUDA_HOME&lt;/span&gt;/lib64/libcudnn.so &lt;span class=&quot;nt&quot;&gt;-DCMAKE_PREFIX_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ENV_PATH&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-DCMAKE_INSTALL_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ENV_PATH&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-DCMAKE_CXX_FLAGS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-std=c++11&quot;&lt;/span&gt; ..&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;cmake &lt;span class=&quot;nt&quot;&gt;-DBLAS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;open &lt;span class=&quot;nt&quot;&gt;-DCUDNN_INCLUDE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$CUDA_HOME&lt;/span&gt;/include/ &lt;span class=&quot;nt&quot;&gt;-DCUDNN_LIBRARY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$CUDA_HOME&lt;/span&gt;/lib64/libcudnn.so &lt;span class=&quot;nt&quot;&gt;-DCMAKE_PREFIX_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$CONDA_PREFIX&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-DCMAKE_INSTALL_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$CONDA_PREFIX&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-DCMAKE_CXX_FLAGS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-std=c++11&quot;&lt;/span&gt; ..&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;CMake variable &lt;code class=&quot;highlighter-rouge&quot;&gt;BLAS=open&lt;/code&gt; indicates that we would like use OpenBLAS instead of the default
@@ -160,6 +169,7 @@ cuDNN&lt;/li&gt;
 before looking in system install locations (like &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local&lt;/code&gt;)&lt;/li&gt;
   &lt;li&gt;CMake variable  &lt;code class=&quot;highlighter-rouge&quot;&gt;CMAKE_INSTALL_PREFIX&lt;/code&gt; indicates where to install Caffe binaries&lt;/li&gt;
   &lt;li&gt;CMake variable  &lt;code class=&quot;highlighter-rouge&quot;&gt;DCMAKE_CXX_FLAGS&lt;/code&gt; indicates which C++ compiler version to use&lt;/li&gt;
+  &lt;li&gt;CMake variable  &lt;code class=&quot;highlighter-rouge&quot;&gt;CPU&lt;/code&gt; indicates whether or not to use CPU-only installation&lt;/li&gt;
   &lt;li&gt;Also see the &lt;a href=&quot;https://github.com/BVLC/caffe/pull/1667&quot;&gt;list of the available make flags&lt;/a&gt; and their default
 values&lt;/li&gt;
 &lt;/ul&gt;
@@ -173,16 +183,19 @@ values&lt;/li&gt;
 General rule of thumb is to use 1 + n number of jobs where n is the output from
 the previous command. i.e. number of cores. Mine was 24 so I run the following&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;make all &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; 25&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;make all &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; 25
+make pycaffe&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;After make is completed, we are now finally ready to install&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;make install&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;You’d think we’re done, but not quite! For some reason python will not know
-where to look for the caffe python modules. I’m not sure why is this and if you
-do know how to fix it in the installation process, please let me know! We have
-to point the &lt;code class=&quot;highlighter-rouge&quot;&gt;$PYTHONPATH&lt;/code&gt; environment variable to our caffe folder like so&lt;/p&gt;
+&lt;p&gt;Now we run test&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;make runtest&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You’d think we’re done, but not quite! We have to point the &lt;code class=&quot;highlighter-rouge&quot;&gt;$PYTHONPATH&lt;/code&gt;
+environment variable to our caffe folder like so&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PYTHONPATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/caffe/python:&lt;span class=&quot;nv&quot;&gt;$PYTHONPATH&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
@@ -194,7 +207,7 @@ the same name. For instance, both caffe and caffe2 contain a module named
 ‘caffe’.&lt;/p&gt;
 
 &lt;p&gt;The solution to overcome this is to write a script to save our environment
-variables within our environment so that they get loaded automatically every
+variables within our environemnt so that they get loaded automatically every
 time we activate our environment and get unset automatically when we deactivate
 our environment. The following steps are an adaptation of this
 &lt;a href=&quot;https://conda.io/docs/user-guide/tasks/manage-environments.html#macos-and-linux&quot;&gt;guide&lt;/a&gt;
@@ -229,7 +242,7 @@ touch ./etc/conda/deactivate.d/env_vars.sh&lt;/code&gt;&lt;/pre&gt;&lt;/figure&g
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~
 &lt;span class=&quot;c&quot;&gt;# To check if Caffe build was successful&lt;/span&gt;
 python &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'import caffe; caffe.set_mode_gpu()'&lt;/span&gt; 2&amp;gt;/dev/null &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Success&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Failure&quot;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#=&amp;gt; Success&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Jin Zhe</name></author><category term="caffe" /><category term="CUDA" /><category term="cuDNN" /><category term="anaconda" /><summary type="html">The following guide shows you how to install install Caffe with CUDA under the Anaconda 2 virtual environment.</summary></entry><entry><title type="html">Installing Caffe2 with CUDA on Anaconda</title><link href="http://localhost:4000/guides/installing-caffe2-with-cuda-on-anaconda/" rel="alternate" type="text/html" title="Installing Caffe2 with CUDA on Anaconda" /><published>2018-02-19T16:10:00+08:00</published><updated>2018-02-19T16:10:00+08:00</updated><id>http://localhost:4000/guides/installing-caffe2-with-cuda-on-anaconda</id><content type="html" xml:base="http://localhost:4000/guides/installing-caffe2-with-cuda-on-anaconda/">&lt;p&gt;The following guide shows you how to install install &lt;a href=&quot;https://github.com/caffe2/caffe2&quot;&gt;Caffe2&lt;/a&gt; with CUDA
+&lt;span class=&quot;c&quot;&gt;#=&amp;gt; Success&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Jin Zhe</name></author><category term="caffe" /><category term="CUDA" /><category term="cuDNN" /><category term="anaconda" /><summary type="html"></summary></entry><entry><title type="html">Installing Caffe2 with CUDA on Anaconda</title><link href="http://localhost:4000/guides/installing-caffe2-with-cuda-on-anaconda/" rel="alternate" type="text/html" title="Installing Caffe2 with CUDA on Anaconda" /><published>2018-02-19T16:10:00+08:00</published><updated>2018-02-19T16:10:00+08:00</updated><id>http://localhost:4000/guides/installing-caffe2-with-cuda-on-anaconda</id><content type="html" xml:base="http://localhost:4000/guides/installing-caffe2-with-cuda-on-anaconda/">&lt;p&gt;The following guide shows you how to install install &lt;a href=&quot;https://github.com/caffe2/caffe2&quot;&gt;Caffe2&lt;/a&gt; with CUDA
 under the Anaconda 2 virtual environment without needing to use &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo&lt;/code&gt;. This
 guide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUs
 with CUDA support. i.e it assumes CUDA is already installed by a system admin.
@@ -268,27 +281,29 @@ accordingly for the rest of this guide&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;After it prepares the environment and installs the defaults, activate the
 virtual environment via&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;activate caffe2
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda activate caffe2
 &lt;span class=&quot;c&quot;&gt;# to deactivate: source deactivate caffe2&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Now let’s install the necessary dependencies in our current caffe2 environment:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda install &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; future gflags glog lmdb mkl mkl-include numpy opencv protobuf snappy six cmake&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;conda install future gflags glog lmdb mkl mkl-include numpy opencv protobuf snappy six cmake &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Let’s clone the caffe2’s repo and its submodules into our home directory.&lt;/p&gt;
+&lt;p&gt;Let’s clone caffe2’s repo and its submodules into our home directory.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~
-git clone &lt;span class=&quot;nt&quot;&gt;--recursive&lt;/span&gt; https://github.com/pytorch/pytorch.git &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;pytorch
+git clone &lt;span class=&quot;nt&quot;&gt;--recursive&lt;/span&gt; https://github.com/pytorch/pytorch.git
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;pytorch
 git submodule update &lt;span class=&quot;nt&quot;&gt;--init&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--recursive&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;We shall avoid polluting the PyTorch source tree by building within a build
-folder (yes within PyTorch root directory, not within Caffe2 directory!)&lt;/p&gt;
+&lt;p&gt;We shall avoid polluting the pytorch source tree by building
+within a build folder&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mkdir build &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;build&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mkdir build &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;build
+&lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#=&amp;gt; ~/pytorch/build&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;We shall now build the package using CMake with the following flags&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;cmake &lt;span class=&quot;nt&quot;&gt;-DCUDNN_INCLUDE_DIR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/cuda/include &lt;span class=&quot;nt&quot;&gt;-DCUDNN_LIBRARY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/cuda/lib64/libcudnn.so &lt;span class=&quot;nt&quot;&gt;-DCMAKE_PREFIX_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/anaconda2/envs/caffe2 &lt;span class=&quot;nt&quot;&gt;-DCMAKE_INSTALL_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/anaconda2/envs/caffe2 ..&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;cmake &lt;span class=&quot;nt&quot;&gt;-DCUDNN_INCLUDE_DIR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/cuda/include &lt;span class=&quot;nt&quot;&gt;-DCUDNN_LIBRARY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/cuda/lib64/libcudnn.so &lt;span class=&quot;nt&quot;&gt;-DCMAKE_PREFIX_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$CONDA_PREFIX&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-DCMAKE_INSTALL_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$CONDA_PREFIX&lt;/span&gt; ..&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;CMake variable  &lt;code class=&quot;highlighter-rouge&quot;&gt;CUDNN_INCLUDE_DIR&lt;/code&gt; indicates where to find the &lt;code class=&quot;highlighter-rouge&quot;&gt;include&lt;/code&gt; directory for your
@@ -299,6 +314,7 @@ before looking in system install locations (like &lt;code class=&quot;highlighte
   &lt;li&gt;CMake variable  &lt;code class=&quot;highlighter-rouge&quot;&gt;CMAKE_INSTALL_PREFIX&lt;/code&gt; indicates where to install Caffe2 binaries such as
 &lt;code class=&quot;highlighter-rouge&quot;&gt;libcaffe2.dylib&lt;/code&gt; after Caffe2 has been successfully built, the default is
 &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local&lt;/code&gt; which will require administrator privilege&lt;/li&gt;
+  &lt;li&gt;CMake variable  &lt;code class=&quot;highlighter-rouge&quot;&gt;CPU&lt;/code&gt; indicates whether or not to use CPU=only installation&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Let’s find out how many cores your machine has&lt;/p&gt;
@@ -316,12 +332,10 @@ the previous command. i.e. number of cores. Mine was 24 so I run the following&l
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;make install&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;You’d think we’re done, but not quite! For some reason python will not know
-where to look for the caffe2 python modules. I’m not sure why is this and if you
-do know how to fix it in the installation process, please let me know! We have
-to point the &lt;code class=&quot;highlighter-rouge&quot;&gt;$PYTHONPATH&lt;/code&gt; environment variable to our caffe2 build folder&lt;/p&gt;
+&lt;p&gt;You’d think we’re done, but not quite! We have to point the &lt;code class=&quot;highlighter-rouge&quot;&gt;$PYTHONPATH&lt;/code&gt;
+environment variable to our caffe folder like so&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PYTHONPATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/caffe2/build:&lt;span class=&quot;nv&quot;&gt;$PYTHONPATH&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PYTHONPATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/pytorch/build:&lt;span class=&quot;nv&quot;&gt;$PYTHONPATH&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;However it will be tedious to type that everytime we activate our environment.
 You may append that line to &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;.bashrc&lt;/code&gt; but some variables
@@ -349,7 +363,7 @@ touch ./etc/conda/deactivate.d/env_vars.sh&lt;/code&gt;&lt;/pre&gt;&lt;/figure&g
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
 
-&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PYTHONPATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/caffe2/build:&lt;span class=&quot;nv&quot;&gt;$PYTHONPATH&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PYTHONPATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/pytorch/build:&lt;span class=&quot;nv&quot;&gt;$PYTHONPATH&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Edit &lt;code class=&quot;highlighter-rouge&quot;&gt;./etc/conda/deactivate.d/env_vars.sh&lt;/code&gt; as follows:&lt;/p&gt;
 
@@ -371,7 +385,7 @@ python &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&
 &lt;span class=&quot;c&quot;&gt;# To check if Caffe2 GPU build was successful&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# This must print a number &amp;gt; 0 in order to use Detectron&lt;/span&gt;
 python2 &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'from caffe2.python import workspace; print(workspace.NumCudaDevices())'&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#=&amp;gt; 1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Jin Zhe</name></author><category term="caffe2" /><category term="CUDA" /><category term="cuDNN" /><category term="anaconda" /><summary type="html">The following guide shows you how to install install Caffe2 with CUDA under the Anaconda 2 virtual environment without needing to use sudo. This guide is meant for machines running on Ubuntu 16.04 equipped with NVIDIA GPUs with CUDA support. i.e it assumes CUDA is already installed by a system admin. As caffe2 is best supported on Python 2 at the time of this writing, this installation guide is written for Python 2.7.</summary></entry><entry><title type="html">Getting CUDA with cuDNN</title><link href="http://localhost:4000/guides/getting-cudnn/" rel="alternate" type="text/html" title="Getting CUDA with cuDNN" /><published>2018-02-18T16:10:00+08:00</published><updated>2018-02-18T16:10:00+08:00</updated><id>http://localhost:4000/guides/getting-cudnn</id><content type="html" xml:base="http://localhost:4000/guides/getting-cudnn/">&lt;p&gt;In this guide I will show you how to install CUDA with cuDNN in your home
+&lt;span class=&quot;c&quot;&gt;#=&amp;gt; 1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>Jin Zhe</name></author><category term="caffe2" /><category term="CUDA" /><category term="cuDNN" /><category term="anaconda" /><summary type="html"></summary></entry><entry><title type="html">Getting CUDA with cuDNN</title><link href="http://localhost:4000/guides/getting-cudnn/" rel="alternate" type="text/html" title="Getting CUDA with cuDNN" /><published>2018-02-18T16:10:00+08:00</published><updated>2018-02-18T16:10:00+08:00</updated><id>http://localhost:4000/guides/getting-cudnn</id><content type="html" xml:base="http://localhost:4000/guides/getting-cudnn/">&lt;p&gt;In this guide I will show you how to install CUDA with cuDNN in your home
 directory without invoking admin privileges. Unless stated otherwise, we
 will be using this configuration for all of my guides.&lt;/p&gt;
 

@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Installing Caffe with CUDA on Anaconda - JIN ZHE’s blog</title>
-<meta name="description" content="The following guide shows you how to install install Caffe with CUDAunder the Anaconda 2 virtual environment.">
+<meta name="description" content="">
 
 
 
@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://localhost:4000/guides/installing-caffe-with-cuda-on-anaconda/">
 
 
-  <meta property="og:description" content="The following guide shows you how to install install Caffe with CUDAunder the Anaconda 2 virtual environment.">
+  <meta property="og:description" content="">
 
 
 
@@ -247,7 +247,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Installing Caffe with CUDA on Anaconda">
-    <meta itemprop="description" content="The following guide shows you how to install install Caffe with CUDAunder the Anaconda 2 virtual environment.">
+    <meta itemprop="description" content="">
     <meta itemprop="datePublished" content="February 28, 2018">
     
 
@@ -270,7 +270,8 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>The following guide shows you how to install install <a href="http://caffe.berkeleyvision.org">Caffe</a> with CUDA
+        
+<p>The following guide shows you how to install install <a href="http://caffe.berkeleyvision.org">Caffe</a> with CUDA
 under the Anaconda 2 virtual environment.</p>
 
 <h1 id="assumptions">Assumptions</h1>
@@ -299,27 +300,36 @@ under the Anaconda 2 virtual environment.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda create <span class="nt">-n</span> caffe <span class="nv">python</span><span class="o">=</span>2.7 anaconda</code></pre></figure>
 
+<p><em>You many of course use a different environment name, just be sure to adjust
+accordingly for the rest of this guide</em></p>
+
 <p>After it prepares the environment and installs the defaults, activate the
 virtual environment via</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">source </span>activate caffe</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda activate caffe
+<span class="c"># to deactivate: source deactivate caffe</span></code></pre></figure>
 
 <p>Now let’s install the necessary dependencies in our current caffe environment:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda install lmdb openblas glog gflags hdf5 protobuf leveldb boost opencv cmake <span class="nv">numpy</span><span class="o">=</span>1.15 <span class="nt">-y</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda install lmdb openblas glog gflags hdf5 protobuf leveldb boost opencv cmake <span class="nv">numpy</span><span class="o">=</span>1.15 <span class="nt">-y</span>
+conda install <span class="nt">-c</span> conda-forge doxygen <span class="nt">-y</span></code></pre></figure>
 
-<p>Let’s clone the caffe’s repo into our home directory.</p>
+<p>Let’s clone caffe’s repo and its submodules into our home directory.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> ~ <span class="o">&amp;&amp;</span> git clone <span class="nt">--recursive</span> https://github.com/BVLC/caffe <span class="o">&amp;&amp;</span> <span class="nb">cd </span>caffe</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> ~
+git clone <span class="nt">--recursive</span> https://github.com/BVLC/caffe.git
+<span class="nb">cd </span>caffe
+git submodule update <span class="nt">--init</span> <span class="nt">--recursive</span></code></pre></figure>
 
-<p>We shall avoid polluting the caffe source tree by building within build a folder</p>
+<p>We shall avoid polluting the caffe source tree by building
+within a build folder</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build
+<span class="nb">pwd</span> <span class="c">#=&gt; ~/caffe/build</span></code></pre></figure>
 
 <p>We shall now build the package using CMake with the following flags</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">export </span><span class="nv">ENV_PATH</span><span class="o">=</span><span class="nv">$HOME</span>/anaconda2/envs/caffe
-cmake <span class="nt">-DBLAS</span><span class="o">=</span>open <span class="nt">-DCUDNN_INCLUDE</span><span class="o">=</span><span class="nv">$CUDA_HOME</span>/include/ <span class="nt">-DCUDNN_LIBRARY</span><span class="o">=</span><span class="nv">$CUDA_HOME</span>/lib64/libcudnn.so <span class="nt">-DCMAKE_PREFIX_PATH</span><span class="o">=</span><span class="nv">$ENV_PATH</span> <span class="nt">-DCMAKE_INSTALL_PREFIX</span><span class="o">=</span><span class="nv">$ENV_PATH</span> <span class="nt">-DCMAKE_CXX_FLAGS</span><span class="o">=</span><span class="s2">"-std=c++11"</span> ..</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">cmake <span class="nt">-DBLAS</span><span class="o">=</span>open <span class="nt">-DCUDNN_INCLUDE</span><span class="o">=</span><span class="nv">$CUDA_HOME</span>/include/ <span class="nt">-DCUDNN_LIBRARY</span><span class="o">=</span><span class="nv">$CUDA_HOME</span>/lib64/libcudnn.so <span class="nt">-DCMAKE_PREFIX_PATH</span><span class="o">=</span><span class="nv">$CONDA_PREFIX</span> <span class="nt">-DCMAKE_INSTALL_PREFIX</span><span class="o">=</span><span class="nv">$CONDA_PREFIX</span> <span class="nt">-DCMAKE_CXX_FLAGS</span><span class="o">=</span><span class="s2">"-std=c++11"</span> ..</code></pre></figure>
 
 <ul>
   <li>CMake variable <code class="highlighter-rouge">BLAS=open</code> indicates that we would like use OpenBLAS instead of the default
@@ -331,6 +341,7 @@ cuDNN</li>
 before looking in system install locations (like <code class="highlighter-rouge">/usr/local</code>)</li>
   <li>CMake variable  <code class="highlighter-rouge">CMAKE_INSTALL_PREFIX</code> indicates where to install Caffe binaries</li>
   <li>CMake variable  <code class="highlighter-rouge">DCMAKE_CXX_FLAGS</code> indicates which C++ compiler version to use</li>
+  <li>CMake variable  <code class="highlighter-rouge">CPU</code> indicates whether or not to use CPU-only installation</li>
   <li>Also see the <a href="https://github.com/BVLC/caffe/pull/1667">list of the available make flags</a> and their default
 values</li>
 </ul>
@@ -344,16 +355,19 @@ values</li>
 General rule of thumb is to use 1 + n number of jobs where n is the output from
 the previous command. i.e. number of cores. Mine was 24 so I run the following</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">make all <span class="nt">-j</span> 25</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">make all <span class="nt">-j</span> 25
+make pycaffe</code></pre></figure>
 
 <p>After make is completed, we are now finally ready to install</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">make install</code></pre></figure>
 
-<p>You’d think we’re done, but not quite! For some reason python will not know
-where to look for the caffe python modules. I’m not sure why is this and if you
-do know how to fix it in the installation process, please let me know! We have
-to point the <code class="highlighter-rouge">$PYTHONPATH</code> environment variable to our caffe folder like so</p>
+<p>Now we run test</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">make runtest</code></pre></figure>
+
+<p>You’d think we’re done, but not quite! We have to point the <code class="highlighter-rouge">$PYTHONPATH</code>
+environment variable to our caffe folder like so</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">export </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="nv">$HOME</span>/caffe/python:<span class="nv">$PYTHONPATH</span></code></pre></figure>
 
@@ -365,7 +379,7 @@ the same name. For instance, both caffe and caffe2 contain a module named
 ‘caffe’.</p>
 
 <p>The solution to overcome this is to write a script to save our environment
-variables within our environment so that they get loaded automatically every
+variables within our environemnt so that they get loaded automatically every
 time we activate our environment and get unset automatically when we deactivate
 our environment. The following steps are an adaptation of this
 <a href="https://conda.io/docs/user-guide/tasks/manage-environments.html#macos-and-linux">guide</a>
@@ -552,9 +566,8 @@ under the Anaconda 2 virtual environment.
   3 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">The following guide shows you how to install install Caffe2 with CUDA
-under the Anaconda 2 virtual environment without needing to use sudo. This
-guide is mea...</p>
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
   </article>
 </div>
 
