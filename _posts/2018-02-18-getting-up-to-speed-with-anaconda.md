@@ -40,6 +40,11 @@ Be sure to run a first update right after installation
 conda update conda
 {% endhighlight %}
 
+For most intents and purposes, you probably want to install all the necessary packages for data-science in the base environment. To do this:
+{% highlight bash %}
+conda install anaconda
+{% endhighlight %}
+
 We are done!
 
 # Quick Start
