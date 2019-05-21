@@ -44,7 +44,7 @@ First, get cuDNN by following this [cuDNN Guide][cudnn-guide].
 
 We shall now build the package using CMake with the following flags
 {% highlight bash %}
-cmake -DCUDNN_INCLUDE_DIR=~$CUDA_HOME/include -DCUDNN_LIBRARY=~$CUDA_HOME/lib64/libcudnn.so -DCMAKE_PREFIX_PATH=$CONDA_PREFIX -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX ..
+cmake -DCUDNN_INCLUDE_DIR=$CUDA_HOME/include -DCUDNN_LIBRARY=$CUDA_HOME/lib64/libcudnn.so -DCMAKE_PREFIX_PATH=$CONDA_PREFIX -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX ...
 {% endhighlight %}
 * CMake variable  `CUDNN_INCLUDE_DIR` indicates where to find the `include` directory for your
 cuDNN
