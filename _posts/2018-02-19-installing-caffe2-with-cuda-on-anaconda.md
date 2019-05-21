@@ -36,7 +36,7 @@ First, get cuDNN by following this [cuDNN Guide][cudnn-guide].
 
 {% include_relative _includes/_conda_create_env.md env_name=env_name python_ver="2.7" channel="anaconda" %}
 
-{% include_relative _includes/_conda_install.md env_name=env_name installs="future gflags glog lmdb mkl mkl-include numpy opencv protobuf pyyaml snappy six cmake" %}
+{% include_relative _includes/_conda_install.md env_name=env_name installs="cmake future gflags glog lmdb mkl mkl-include numpy opencv protobuf pyyaml snappy six typing" %}
 
 {% include_relative _includes/_git_clone.md env_name=env_name url="https://github.com/pytorch/pytorch.git" repo_name=repo_name %}
 
