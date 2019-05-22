@@ -34,9 +34,11 @@ This guide is written for the following specs:
 # Guide
 First, get cuDNN by following this [cuDNN Guide][cudnn-guide].
 
-{% include_relative _includes/_conda_create_env.md env_name=env_name python_ver="2.7" channel="anaconda" %}
+{% include_relative _includes/_conda_create_env.md env_name=env_name python_ver="2.7" channel="" %}
 
-{% include_relative _includes/_conda_install.md env_name=env_name installs="cmake future gflags glog hypothesis lmdb mkl mkl-include numpy opencv protobuf pyyaml scipy six snappy typing" %}
+{% include_relative _includes/_conda_install.md env_name=env_name installs="cffi cmake future gflags glog hypothesis lmdb mkl mkl-include numpy opencv protobuf pyyaml setuptools scipy six snappy typing" %}
+
+{% include_relative _includes/_conda_install.md env_name=env_name installs="magma-cuda90" channel="pytorch" %}
 
 {% include_relative _includes/_git_clone.md env_name=env_name url="https://github.com/pytorch/pytorch.git" repo_name=repo_name %}
 
