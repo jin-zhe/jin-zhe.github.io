@@ -10,7 +10,7 @@ variables within our environemnt so that they get loaded automatically every
 time we activate our environment and get unset automatically when we deactivate
 our environment. The following steps are an adaptation of this
 [guide](https://conda.io/docs/user-guide/tasks/manage-environments.html#macos-and-linux)
-stated in the official Anaconda documentation.
+stated in the official Conda documentation.
 
 Let's enter our environment directory and do the following
 {% highlight bash %}
@@ -37,5 +37,5 @@ unset PYTHONPATH
 
 Now let's reload the current environment to reflect the variables
 {% highlight bash %}
-source activate {{ include.env_name }}
+conda activate {{ include.env_name }}
 {% endhighlight %}

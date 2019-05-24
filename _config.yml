@@ -14,7 +14,7 @@ title                    : "JIN ZHE's blog"
 title_separator          : "-"
 name                     : "JIN ZHE"
 description              : "Jin Zhe's nuggets."
-url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url                      : https://jin-zhe.github.io/
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "jin-zhe.github.io/jin-zhe"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
@@ -93,7 +93,7 @@ analytics:
 author:
   name             : "Jin Zhe"
   avatar           : "/assets/images/bio-photo.jpeg"
-  bio              : "I code."
+  bio              : "PhD candidate in Computer Science at the National University of Singapore"
   location         : "Singapore"
   email            :
   uri              :
@@ -195,12 +195,12 @@ timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 # Plugins (previously gems:)
 plugins:
-  - jekyll-include-cache
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
   - jemoji
+  - jekyll-include-cache  
   - jekyll-seo-tag
 
 # mimic GitHub Pages with --safe

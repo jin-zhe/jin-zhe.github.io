@@ -3,32 +3,32 @@ layout: single
 title:  "Getting CUDA with cuDNN"
 date:   2018-02-18 16:10:00 +0800
 categories: Guides
-tags: cuDNN CUDA NVIDIA
+tags: CUDA cuDNN NVIDIA
 ---
 In this guide I will show you how to install CUDA with cuDNN in your home
 directory without invoking admin privileges. Unless stated otherwise, we
 will be using this configuration for all of my guides.
 
-# Assumptions
+## Assumptions
 * Ubuntu OS 16.04
 * NVIDIA GPU with driver installed
 
-# What is
+## What is
 From NVIDIA:  
-*CUDA® is a parallel computing platform and programming model developed by
-NVIDIA for general computing on graphical processing units (GPUs). With CUDA,
-developers are able to dramatically speed up computing applications by
-harnessing the power of GPUs.*
+> CUDA® is a parallel computing platform and programming model developed by
+  NVIDIA for general computing on graphical processing units (GPUs). With CUDA,
+  developers are able to dramatically speed up computing applications by
+  harnessing the power of GPUs.
 
-*The NVIDIA CUDA® Deep Neural Network library (cuDNN) is a GPU-accelerated
-library of primitives for deep neural networks. cuDNN provides highly tuned
-implementations for standard routines such as forward and backward convolution,
-pooling, normalization, and activation layers.*
+> The NVIDIA CUDA® Deep Neural Network library (cuDNN) is a GPU-accelerated
+  library of primitives for deep neural networks. cuDNN provides highly tuned
+  implementations for standard routines such as forward and backward convolution,
+  pooling, normalization, and activation layers.
 
 In essence, if you are working on deep learning tools and require
 GPU-enabled processes, you will need CUDA along with cuDNN.
 
-# Why
+## Why
 The reason for a non-standard installation is two-fold:
 1. You may not have admin privileges to install CUDA and cuDNN to system paths
 in the conventional manner
@@ -37,9 +37,9 @@ it may still be a good idea to install them on your own because repeating
 research experiments by others sometimes require specific versions of CUDA and
 cuDNN. Non-standard installations can thus grant you the ability to toggle
 between various versions under different environments easily using a
-virtualization manager such as [Anaconda][anaconda]
+virtual environment manager such as [Conda][conda]
 
-# Getting CUDA
+## Getting CUDA
 The standard installation path for cuda is the versioned path
 `/usr/local/cuda-x.x` where `x.x` reflects the version number. The standard
 installation will also create a symlink `/usr/local/cuda` to that versioned
@@ -89,7 +89,7 @@ yet [save the environment variables][manage-environments] under a Conda environm
 
 We are done for CUDA!
 
-# Getting cuDNN
+## Getting cuDNN
 Installing cuDNN is relatively hassle-free as it's simply about unpacking
 cuDNN files into our `$CUDA_HOME` directory.
 
@@ -116,7 +116,7 @@ tar -zxvf cudnn-9.0-linux-x64-v7.tgz -C $CUDA_HOME --strip-components=1
 
 That's it! We are done!
 
-[anaconda]: https://anaconda.org/
+[conda]: https://docs.conda.io/en/latest/index.html
 [download-cuda]: https://developer.nvidia.com/cuda-downloads
 [manage-environments]: https://conda.io/docs/user-guide/tasks/manage-environments.html#saving-environment-variables
 [download-cuDNN]: https://developer.nvidia.com/cudnn

@@ -1,37 +1,41 @@
 ---
 layout: single
-title:  "Installing Caffe with CUDA on Anaconda"
+title:  "Installing Caffe with CUDA in Conda"
 date:   2018-02-28 16:10:00 +0800
 categories: Guides
-tags: caffe CUDA cuDNN anaconda
+tags: Anaconda Caffe Conda CUDA cuDNN Miniconda
 ---
 {% assign env_name= "caffe" %}
 {% capture pythonpath %}$HOME/{{ env_name }}/python{% endcapture %}
 
 The following guide shows you how to install install [Caffe][caffe] with CUDA
-under the Anaconda 2 virtual environment.
+under the Conda virtual environment.
 
-# Assumptions
+## Assumptions
 * Ubuntu OS
 * NVIDIA GPU with CUDA support
-* Anaconda 2 (see installation instructions [here][anaconda-guide])
+* Conda (see installation instructions [here][conda-guide])
 * CUDA (*installed by system admin*)
 
-# Specifications
+## Specifications
 This guide is written for the following specs:
 * Ubuntu 16.04
 * Python 2.7
 * CUDA 8
 * cuDNN v7.1
-* Anaconda 2
+* Miniconda 2
 * OpenCV3
 
-# Guide
+## Guide
 First, get cuDNN by following this [cuDNN Guide][cudnn-guide].
 
-{% include_relative _includes/_conda_create_env.md env_name=env_name python_ver="2.7" channel="anaconda" %}
+{% include_relative _includes/_conda_create_env.md env_name=env_name python_ver="2.7" %}
 
-{% include_relative _includes/_conda_install.md env_name=env_name installs="lmdb openblas glog gflags hdf5 protobuf leveldb boost opencv cmake numpy=1.15,-c conda-forge doxygen" %}
+Now let's install the necessary dependencies in our current {{ env_name }} environment:
+{% highlight bash %}
+{% include_relative _includes/_conda_install.md packages="lmdb openblas glog gflags hdf5 protobuf leveldb boost opencv cmake numpy=1.15" %}
+{% include_relative _includes/_conda_install.md packages="doxygen" channel="conda-forge" %}
+{% endhighlight %}
 
 {% include_relative _includes/_git_clone.md env_name=env_name url="https://github.com/BVLC/caffe.git" repo_name=env_name %}
 
@@ -74,6 +78,6 @@ python -c 'import caffe; caffe.set_mode_gpu()' 2>/dev/null && echo "Success" || 
 {% endhighlight %}
 
 [caffe]: http://caffe.berkeleyvision.org
-[anaconda-guide]: {% post_url 2018-02-18-getting-up-to-speed-with-anaconda %}
+[conda-guide]: {% post_url 2018-02-18-getting-up-to-speed-with-conda %}
 [cudnn-guide]: {% post_url 2018-02-17-getting-cudnn %}
 [cmake-flags]: https://github.com/BVLC/caffe/pull/1667

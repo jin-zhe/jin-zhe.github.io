@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  Minimal Mistakes Jekyll Theme 4.15.2 by Michael Rose
+  Minimal Mistakes Jekyll Theme 4.16.3 by Michael Rose
   Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
@@ -78,7 +78,7 @@
 
 <!-- For all browsers -->
 <link rel="stylesheet" href="/assets/css/main.css">
-
+<link rel="shortcut icon" type="image/png" href="/favicon.ico">
 <!--[if IE ]>
   <style>
     /* old IE unsupported flexbox fixes */
@@ -149,7 +149,7 @@
       
 
       
-        <img src="/assets/images/bio-photo.png" alt="Jin Zhe" itemprop="image">
+        <img src="/assets/images/bio-photo.jpeg" alt="Jin Zhe" itemprop="image">
       
     </div>
   
@@ -160,7 +160,7 @@
     
     
       <p class="author__bio" itemprop="description">
-        I code.
+        PhD candidate in Computer Science at the National University of Singapore
       </p>
     
   </div>
@@ -274,28 +274,32 @@
 directory without invoking admin privileges. Unless stated otherwise, we
 will be using this configuration for all of my guides.</p>
 
-<h1 id="assumptions">Assumptions</h1>
+<h2 id="assumptions">Assumptions</h2>
 <ul>
   <li>Ubuntu OS 16.04</li>
   <li>NVIDIA GPU with driver installed</li>
 </ul>
 
-<h1 id="what-is">What is</h1>
-<p>From NVIDIA:<br />
-<em>CUDA® is a parallel computing platform and programming model developed by
-NVIDIA for general computing on graphical processing units (GPUs). With CUDA,
-developers are able to dramatically speed up computing applications by
-harnessing the power of GPUs.</em></p>
+<h2 id="what-is">What is</h2>
+<p>From NVIDIA:</p>
+<blockquote>
+  <p>CUDA® is a parallel computing platform and programming model developed by
+  NVIDIA for general computing on graphical processing units (GPUs). With CUDA,
+  developers are able to dramatically speed up computing applications by
+  harnessing the power of GPUs.</p>
+</blockquote>
 
-<p><em>The NVIDIA CUDA® Deep Neural Network library (cuDNN) is a GPU-accelerated
-library of primitives for deep neural networks. cuDNN provides highly tuned
-implementations for standard routines such as forward and backward convolution,
-pooling, normalization, and activation layers.</em></p>
+<blockquote>
+  <p>The NVIDIA CUDA® Deep Neural Network library (cuDNN) is a GPU-accelerated
+  library of primitives for deep neural networks. cuDNN provides highly tuned
+  implementations for standard routines such as forward and backward convolution,
+  pooling, normalization, and activation layers.</p>
+</blockquote>
 
 <p>In essence, if you are working on deep learning tools and require
 GPU-enabled processes, you will need CUDA along with cuDNN.</p>
 
-<h1 id="why">Why</h1>
+<h2 id="why">Why</h2>
 <p>The reason for a non-standard installation is two-fold:</p>
 <ol>
   <li>You may not have admin privileges to install CUDA and cuDNN to system paths
@@ -305,10 +309,10 @@ it may still be a good idea to install them on your own because repeating
 research experiments by others sometimes require specific versions of CUDA and
 cuDNN. Non-standard installations can thus grant you the ability to toggle
 between various versions under different environments easily using a
-virtualization manager such as <a href="https://anaconda.org/">Anaconda</a></li>
+virtual environment manager such as <a href="https://docs.conda.io/en/latest/index.html">Conda</a></li>
 </ol>
 
-<h1 id="getting-cuda">Getting CUDA</h1>
+<h2 id="getting-cuda">Getting CUDA</h2>
 <p>The standard installation path for cuda is the versioned path
 <code class="highlighter-rouge">/usr/local/cuda-x.x</code> where <code class="highlighter-rouge">x.x</code> reflects the version number. The standard
 installation will also create a symlink <code class="highlighter-rouge">/usr/local/cuda</code> to that versioned
@@ -354,7 +358,7 @@ yet <a href="https://conda.io/docs/user-guide/tasks/manage-environments.html#sav
 
 <p>We are done for CUDA!</p>
 
-<h1 id="getting-cudnn">Getting cuDNN</h1>
+<h2 id="getting-cudnn">Getting cuDNN</h2>
 <p>Installing cuDNN is relatively hassle-free as it’s simply about unpacking
 cuDNN files into our <code class="highlighter-rouge">$CUDA_HOME</code> directory.</p>
 
@@ -457,7 +461,7 @@ and simply unpack the cuDNN files into our CUDA directory:</p>
       <a href="#" class="pagination--pager disabled">Previous</a>
     
     
-      <a href="/guides/getting-up-to-speed-with-anaconda/" class="pagination--pager" title="Getting up to speed with Anaconda
+      <a href="/guides/getting-up-to-speed-with-conda/" class="pagination--pager" title="Getting up to speed with Conda
 ">Next</a>
     
   </nav>
@@ -474,7 +478,6 @@ and simply unpack the cuDNN files into our CUDA directory:</p>
       <div class="grid__wrapper">
         
           
-          
 
 
 
@@ -483,7 +486,7 @@ and simply unpack the cuDNN files into our CUDA directory:</p>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/guides/installing-pytorch-with-cuda-on-anaconda/" rel="permalink">Installing pytorch with CUDA on Anaconda
+        <a href="/guides/installing-pytorch-with-cuda-in-conda/" rel="permalink">Installing PyTorch with CUDA in Conda
 </a>
       
     </h2>
@@ -496,15 +499,12 @@ and simply unpack the cuDNN files into our CUDA directory:</p>
   2 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">The following guide shows you how to install pytorch with CUDA
-under the Anaconda 2 virtual environment.
-
+    <p class="archive__item-excerpt" itemprop="description">
 </p>
   </article>
 </div>
 
         
-          
           
 
 
@@ -514,7 +514,7 @@ under the Anaconda 2 virtual environment.
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/guides/installing-caffe-with-cuda-on-anaconda/" rel="permalink">Installing Caffe with CUDA on Anaconda
+        <a href="/guides/installing-caffe-with-cuda-in-conda/" rel="permalink">Installing Caffe with CUDA in Conda
 </a>
       
     </h2>
@@ -534,7 +534,6 @@ under the Anaconda 2 virtual environment.
 
         
           
-          
 
 
 
@@ -543,7 +542,7 @@ under the Anaconda 2 virtual environment.
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/guides/installing-caffe2-with-cuda-on-anaconda/" rel="permalink">Installing Caffe2 with CUDA on Anaconda
+        <a href="/guides/installing-caffe2-with-cuda-in-conda/" rel="permalink">Installing Caffe2 with CUDA in Conda
 </a>
       
     </h2>
@@ -563,7 +562,6 @@ under the Anaconda 2 virtual environment.
 
         
           
-          
 
 
 
@@ -572,7 +570,7 @@ under the Anaconda 2 virtual environment.
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/guides/getting-up-to-speed-with-anaconda/" rel="permalink">Getting up to speed with Anaconda
+        <a href="/guides/getting-up-to-speed-with-conda/" rel="permalink">Getting up to speed with Conda
 </a>
       
     </h2>
@@ -582,18 +580,20 @@ under the Anaconda 2 virtual environment.
 
 
 
-  4 minute read
+  6 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">Anaconda is a freemium open-source software for Python and R and it
-is widely used in scientific computing. It provides a virtual environment
-manager and it ...</p>
+    <p class="archive__item-excerpt" itemprop="description">
+  “Conda is an open source package management system and environment
+  management system that runs on Windows, macOS and Linux. Conda quickly
+  installs, ru...</p>
   </article>
 </div>
 
         
       </div>
     </div>
+  
   
 </div>
 
@@ -623,7 +623,9 @@ manager and it ...</p>
 
     
   <script src="/assets/js/main.min.js"></script>
-  <script data-search-pseudo-elements defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
+
+
 
 
 
