@@ -83,6 +83,10 @@ python setup.py install
 * To determine assignment for MAX_JOBS, please use the number that is one more
   than the output from `cat /proc/cpuinfo | grep processor | wc -l`
 
+{% include_relative _includes/_pythonpath.md pythonpath=pythonpath %}
+
+{% include_relative _includes/_conda_env_vars.md pythonpath=pythonpath env_name=env_name %}
+
 We are now ready to test if PyTorch has been installed correctly with CUDA
 
 To check if PyTorch was installed successfully:
