@@ -71,7 +71,7 @@ Upon opening the file, you will be greeted with the documentation header which i
 ```
 SHELL=/bin/bash
 BASH_ENV=~/.bashrc_conda
-* * * * * </path/to/your/job_script.sh> &> </path/to/your/job.log>
+* * * * * </path/to/your/job_script.sh> >> </path/to/your/job.log> 2>&1
 
 ```
 On why the first two declarations before the job specification, see [here](https://stackoverflow.com/questions/36365801/run-a-crontab-job-using-an-anaconda-env).
